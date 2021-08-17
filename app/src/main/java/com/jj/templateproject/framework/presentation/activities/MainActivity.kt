@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.jj.templateproject.data.utils.getAboutVersionText
 import com.jj.templateproject.databinding.ActivityMainBinding
 import com.jj.templateproject.framework.viewmodels.MainViewModel
-import com.jj.templateproject.framework.viewmodels.MainViewState
+import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import kotlinx.coroutines.flow.collect
 
 class MainActivity : AppCompatActivity() {
