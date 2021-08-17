@@ -1,4 +1,4 @@
-package com.jj.templateproject.presentation.activities
+package com.jj.templateproject.framework.presentation.activities
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
