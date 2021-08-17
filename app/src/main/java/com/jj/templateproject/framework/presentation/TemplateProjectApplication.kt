@@ -1,4 +1,4 @@
-package com.jj.templateproject.presentation
+package com.jj.templateproject.framework.presentation
 
 import android.app.Application
 import com.jj.templateproject.di.koin.mainModule
