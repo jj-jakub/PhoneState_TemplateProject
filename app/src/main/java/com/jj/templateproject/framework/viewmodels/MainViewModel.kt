@@ -3,25 +3,17 @@ package com.jj.templateproject.framework.viewmodels
 import androidx.lifecycle.ViewModel
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.network.NetworkManager
-import com.jj.templateproject.framework.network.NetworkState
-import com.jj.templateproject.framework.network.NetworkState.Connected
-import com.jj.templateproject.framework.network.NetworkState.NotConnected
-import com.jj.templateproject.framework.network.NetworkState.Unknown
+import com.jj.templateproject.domain.network.NetworkState
+import com.jj.templateproject.domain.network.NetworkState.Connected
+import com.jj.templateproject.domain.network.NetworkState.NotConnected
+import com.jj.templateproject.domain.network.NetworkState.Unknown
+import com.jj.templateproject.framework.viewmodels.states.MainViewState
+import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.inject
-
-data class NetworkViewState(
-    val isKnown: Boolean = false,
-    val isActive: Boolean = false,
-    val type: String = ""
-)
-
-data class MainViewState(
-    val networkViewState: NetworkViewState = NetworkViewState()
-) : BaseViewState
 
 class MainViewModel : ViewModel() {
 

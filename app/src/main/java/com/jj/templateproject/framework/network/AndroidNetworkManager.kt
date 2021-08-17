@@ -12,16 +12,11 @@ import com.jj.templateproject.data.network.NetworkChange
 import com.jj.templateproject.data.network.NetworkChange.NetworkAvailable
 import com.jj.templateproject.data.network.NetworkChange.NetworkLost
 import com.jj.templateproject.domain.network.NetworkManager
+import com.jj.templateproject.domain.network.NetworkState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-
-sealed class NetworkState {
-    class Connected(val type: String) : NetworkState()
-    object NotConnected : NetworkState()
-    object Unknown : NetworkState()
-}
 
 class AndroidNetworkManager(
     private val context: Context,
