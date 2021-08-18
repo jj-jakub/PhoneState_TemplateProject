@@ -2,11 +2,12 @@ package com.jj.templateproject.framework.airplanemode
 
 import android.content.Context
 import android.provider.Settings
+import com.jj.templateproject.domain.airplanemode.AirplaneModeChange
+import com.jj.templateproject.domain.airplanemode.AirplaneModeChange.TurnedOff
+import com.jj.templateproject.domain.airplanemode.AirplaneModeChange.TurnedOn
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
-import com.jj.templateproject.framework.airplanemode.AirplaneModeChange.TurnedOff
-import com.jj.templateproject.framework.airplanemode.AirplaneModeChange.TurnedOn
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect

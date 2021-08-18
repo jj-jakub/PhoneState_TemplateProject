@@ -8,9 +8,9 @@ import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
 import android.net.NetworkCapabilities.TRANSPORT_ETHERNET
 import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
-import com.jj.templateproject.data.network.NetworkChange
-import com.jj.templateproject.data.network.NetworkChange.NetworkAvailable
-import com.jj.templateproject.data.network.NetworkChange.NetworkLost
+import com.jj.templateproject.domain.network.NetworkChange
+import com.jj.templateproject.domain.network.NetworkChange.NetworkAvailable
+import com.jj.templateproject.domain.network.NetworkChange.NetworkLost
 import com.jj.templateproject.domain.network.NetworkManager
 import com.jj.templateproject.domain.network.NetworkState
 import kotlinx.coroutines.flow.MutableStateFlow
