@@ -1,11 +1,11 @@
-package com.jj.templateproject.data.device
+package com.jj.templateproject.framework.device
 
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
-import com.jj.templateproject.domain.device.IDeviceStateManager
+import com.jj.templateproject.domain.device.DeviceStateManager
 import com.jj.templateproject.domain.network.NetworkManager
 import com.jj.templateproject.domain.network.NetworkState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,11 +13,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class DeviceStateManager(
+class AndroidDeviceStateManager(
     networkManager: NetworkManager,
     airplaneModeManager: AirplaneModeManager,
     coroutineScopeProvider: ICoroutineScopeProvider
-) : IDeviceStateManager {
+) : DeviceStateManager {
 
     private val deviceStateFlow = MutableStateFlow(DeviceState())
 
