@@ -2,7 +2,9 @@ package com.jj.templateproject.framework.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
-import com.jj.templateproject.domain.network.NetworkManager
+import com.jj.templateproject.data.device.DeviceState
+import com.jj.templateproject.data.device.DeviceStateChange
+import com.jj.templateproject.domain.device.IDeviceStateManager
 import com.jj.templateproject.domain.network.NetworkState
 import com.jj.templateproject.domain.network.NetworkState.Connected
 import com.jj.templateproject.domain.network.NetworkState.NotConnected
@@ -21,24 +23,34 @@ class MainViewModel : ViewModel() {
 
     fun observeMainViewState() = mainViewStateFlow.asStateFlow()
 
-    private val networkManager: NetworkManager by inject(NetworkManager::class.java)
+    private val deviceStateManager: IDeviceStateManager by inject(IDeviceStateManager::class.java)
     private val coroutineScopeProvider: ICoroutineScopeProvider by inject(ICoroutineScopeProvider::class.java)
 
     init {
         coroutineScopeProvider.createIOScope().launch {
-            networkManager.observeNetworkState().collect { onNetworkStateChanged(it) }
+            deviceStateManager.observeDeviceState().collect { onDeviceStateChanged(it) }
         }
     }
 
-    private fun onNetworkStateChanged(networkState: NetworkState) {
-        val networkViewState = when (networkState) {
-            is Connected -> NetworkViewState(isKnown = true, isActive = true, type = networkState.type)
-            is NotConnected -> NetworkViewState(isKnown = true, isActive = false)
-            is Unknown -> NetworkViewState(isKnown = false)
+    private fun onDeviceStateChanged(newDeviceState: DeviceState) {
+        val newMainViewState = when (newDeviceState.change) {
+            DeviceStateChange.NETWORK -> mainViewStateFlow.value.copy(
+                networkViewState = createNetworkViewState(newDeviceState.networkState)
+            )
+            DeviceStateChange.NONE -> mainViewStateFlow.value
         }
 
-        val mainViewState = mainViewStateFlow.value.copy(networkViewState = networkViewState)
-        changeMainViewStateFlow(mainViewState)
+        changeMainViewStateFlow(newMainViewState)
+    }
+
+    private fun createNetworkViewState(networkState: NetworkState) = when (networkState) {
+        is Connected -> NetworkViewState(
+            isKnown = true,
+            isActive = true,
+            type = networkState.type
+        )
+        is NotConnected -> NetworkViewState(isKnown = true, isActive = false)
+        is Unknown -> NetworkViewState(isKnown = false)
     }
 
     private fun changeMainViewStateFlow(mainViewState: MainViewState) {
