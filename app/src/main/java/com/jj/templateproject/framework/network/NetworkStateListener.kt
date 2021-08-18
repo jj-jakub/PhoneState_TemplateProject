@@ -2,11 +2,9 @@ package com.jj.templateproject.framework.network
 
 import android.net.ConnectivityManager
 import android.net.Network
-import com.jj.templateproject.data.network.NetworkChange
-import com.jj.templateproject.domain.network.NetworkManager
+import com.jj.templateproject.domain.network.NetworkChange
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import org.koin.java.KoinJavaComponent.inject
 
 class NetworkStateListener : ConnectivityManager.NetworkCallback() {
 

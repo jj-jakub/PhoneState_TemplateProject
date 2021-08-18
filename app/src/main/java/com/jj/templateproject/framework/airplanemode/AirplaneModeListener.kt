@@ -4,14 +4,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import com.jj.templateproject.domain.airplanemode.AirplaneModeChange
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-
-sealed class AirplaneModeChange {
-    object TurnedOn : AirplaneModeChange()
-    object TurnedOff : AirplaneModeChange()
-    object Unknown : AirplaneModeChange()
-}
 
 class AirplaneModeListener : BroadcastReceiver() {
 

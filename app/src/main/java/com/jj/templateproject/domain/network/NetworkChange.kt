@@ -1,4 +1,4 @@
-package com.jj.templateproject.data.network
+package com.jj.templateproject.domain.network
 
 import android.net.Network
 
