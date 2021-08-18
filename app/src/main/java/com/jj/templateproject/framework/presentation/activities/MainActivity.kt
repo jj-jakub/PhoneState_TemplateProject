@@ -9,6 +9,7 @@ import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
 import com.jj.templateproject.framework.viewmodels.MainViewModel
 import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
+import com.jj.templateproject.framework.viewmodels.states.BluetoothViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.collect
@@ -38,6 +39,23 @@ class MainActivity : AppCompatActivity() {
     private fun onMainViewStateChanged(mainViewState: MainViewState) {
         setupNetworkViews(mainViewState.networkViewState)
         setupAirplaneModeViews(mainViewState.airplaneModeViewState)
+        setupBluetoothViews(mainViewState.bluetoothViewState)
+    }
+
+    private fun setupBluetoothViews(bluetoothViewState: BluetoothViewState) {
+        activityMainBinding.apply {
+            bluetoothStateIcon.setBackgroundColor(
+                getBackgroundColor(
+                    bluetoothViewState.isKnown,
+                    bluetoothViewState.isActive
+                )
+            )
+            bluetoothStateValue.text = getValueText(
+                bluetoothViewState.isKnown,
+                bluetoothViewState.isActive,
+                bluetoothViewState.type
+            )
+        }
     }
 
     private fun setupAirplaneModeViews(airplaneModeViewState: AirplaneModeViewState) {

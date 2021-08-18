@@ -18,9 +18,9 @@
 
     <TextView
         android:id="@+id/networkStateLabel"
-        android:text="Network status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Network status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/networkStateIcon"
         app:layout_constraintTop_toTopOf="@+id/networkStateIcon"
@@ -57,6 +57,7 @@
         android:id="@+id/bluetoothStateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Bluetooth status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bluetoothStateIcon"
         app:layout_constraintTop_toTopOf="@+id/bluetoothStateIcon"
@@ -109,9 +110,9 @@
 
     <TextView
         android:id="@+id/airplaneModeStateLabel"
-        android:text="Airplane mode status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Airplane mode status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/airplaneModeStateIcon"
         app:layout_constraintTop_toTopOf="@+id/airplaneModeStateIcon"
