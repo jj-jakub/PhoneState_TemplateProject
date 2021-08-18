@@ -3,6 +3,8 @@ package com.jj.templateproject.framework.device
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
+import com.jj.templateproject.domain.bluetooth.BluetoothModeManager
+import com.jj.templateproject.domain.bluetooth.BluetoothModeState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
@@ -16,6 +18,7 @@ import kotlinx.coroutines.launch
 class AndroidDeviceStateManager(
     networkManager: NetworkManager,
     airplaneModeManager: AirplaneModeManager,
+    bluetoothModeManager: BluetoothModeManager,
     coroutineScopeProvider: ICoroutineScopeProvider
 ) : DeviceStateManager {
 
@@ -32,6 +35,21 @@ class AndroidDeviceStateManager(
             airplaneModeManager.observeAirplaneModeState()
                 .collect { onAirplaneModeStateChanged(it) }
         }
+
+        coroutineScopeProvider.createIOScope().launch {
+            bluetoothModeManager.observeBluetoothState().collect {
+                onBluetoothStateChanged(it)
+            }
+        }
+    }
+
+    private fun onBluetoothStateChanged(bluetoothState: BluetoothModeState) {
+        val newDeviceState = deviceStateFlow.value.copy(
+            bluetoothState = bluetoothState,
+            change = DeviceStateChange.BLUETOOTH
+        )
+
+        changeDeviceStateFlow(newDeviceState)
     }
 
     private fun onNetworkStateChanged(networkState: NetworkState) {

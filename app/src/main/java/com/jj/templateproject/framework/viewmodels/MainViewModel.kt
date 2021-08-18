@@ -3,6 +3,7 @@ package com.jj.templateproject.framework.viewmodels
 import androidx.lifecycle.ViewModel
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
+import com.jj.templateproject.domain.bluetooth.BluetoothModeState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
@@ -11,6 +12,7 @@ import com.jj.templateproject.domain.network.NetworkState.Connected
 import com.jj.templateproject.domain.network.NetworkState.NotConnected
 import com.jj.templateproject.domain.network.NetworkState.Unknown
 import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
+import com.jj.templateproject.framework.viewmodels.states.BluetoothViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,6 +44,9 @@ class MainViewModel : ViewModel() {
             DeviceStateChange.AIRPLANE -> mainViewStateFlow.value.copy(
                 airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState)
             )
+            DeviceStateChange.BLUETOOTH -> mainViewStateFlow.value.copy(
+                bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState)
+            )
             DeviceStateChange.NONE -> mainViewStateFlow.value
         }
 
@@ -61,8 +66,31 @@ class MainViewModel : ViewModel() {
     private fun createAirplaneViewState(airplaneModeState: AirplaneModeState) =
         when (airplaneModeState) {
             is AirplaneModeState.TurnedOn -> AirplaneModeViewState(isKnown = true, isActive = true)
-            is AirplaneModeState.TurnedOff -> AirplaneModeViewState(isKnown = true, isActive = false)
+            is AirplaneModeState.TurnedOff -> AirplaneModeViewState(
+                isKnown = true,
+                isActive = false
+            )
             is AirplaneModeState.Unknown -> AirplaneModeViewState(isKnown = false)
+        }
+
+    private fun createBluetoothViewState(bluetoothModeState: BluetoothModeState) =
+        when (bluetoothModeState) {
+            is BluetoothModeState.TurningOn -> BluetoothViewState(
+                isKnown = true, isActive = false, type = "Turning on"
+            )
+            is BluetoothModeState.TurnedOn -> BluetoothViewState(
+                isKnown = true, isActive = true, type = "Turned on"
+            )
+            is BluetoothModeState.TurningOff -> BluetoothViewState(
+                isKnown = true, isActive = false, type = "Turning off"
+            )
+            is BluetoothModeState.TurnedOff -> BluetoothViewState(
+                isKnown = true, isActive = false, type = "Turned off"
+            )
+            is BluetoothModeState.NotAvailable -> BluetoothViewState(
+                isKnown = true, isActive = false, type = "Not available"
+            )
+            else -> BluetoothViewState(isKnown = false, isActive = false)
         }
 
     private fun changeMainViewStateFlow(mainViewState: MainViewState) {
