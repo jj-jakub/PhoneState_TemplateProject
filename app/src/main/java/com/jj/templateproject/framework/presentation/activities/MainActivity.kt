@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
 import com.jj.templateproject.framework.viewmodels.MainViewModel
-import com.jj.templateproject.framework.viewmodels.states.AirplaneViewState
+import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.collect
@@ -37,20 +37,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun onMainViewStateChanged(mainViewState: MainViewState) {
         setupNetworkViews(mainViewState.networkViewState)
-        setupAirplaneModeViews(mainViewState.airplaneViewState)
+        setupAirplaneModeViews(mainViewState.airplaneModeViewState)
     }
 
-    private fun setupAirplaneModeViews(airplaneViewState: AirplaneViewState) {
+    private fun setupAirplaneModeViews(airplaneModeViewState: AirplaneModeViewState) {
         activityMainBinding.apply {
             airplaneModeStateIcon.setBackgroundColor(
                 getBackgroundColor(
-                    airplaneViewState.isKnown,
-                    airplaneViewState.isActive
+                    airplaneModeViewState.isKnown,
+                    airplaneModeViewState.isActive
                 )
             )
             airplaneModeStateValue.text = getValueText(
-                airplaneViewState.isKnown,
-                airplaneViewState.isActive
+                airplaneModeViewState.isKnown,
+                airplaneModeViewState.isActive
             )
         }
     }
