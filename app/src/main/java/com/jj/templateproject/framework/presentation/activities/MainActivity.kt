@@ -8,7 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
 import com.jj.templateproject.framework.viewmodels.MainViewModel
+import com.jj.templateproject.framework.viewmodels.states.AirplaneViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
+import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.collect
 import org.koin.java.KoinJavaComponent.inject
 
@@ -34,8 +36,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onMainViewStateChanged(mainViewState: MainViewState) {
-        val networkViewState = mainViewState.networkViewState
+        setupNetworkViews(mainViewState.networkViewState)
+        setupAirplaneModeViews(mainViewState.airplaneViewState)
+    }
 
+    private fun setupAirplaneModeViews(airplaneViewState: AirplaneViewState) {
+        activityMainBinding.apply {
+            airplaneModeStateIcon.setBackgroundColor(
+                getBackgroundColor(
+                    airplaneViewState.isKnown,
+                    airplaneViewState.isActive
+                )
+            )
+            airplaneModeStateValue.text = getValueText(
+                airplaneViewState.isKnown,
+                airplaneViewState.isActive
+            )
+        }
+    }
+
+    private fun setupNetworkViews(networkViewState: NetworkViewState) {
         activityMainBinding.apply {
             networkStateIcon.setBackgroundColor(
                 getBackgroundColor(
@@ -60,8 +80,9 @@ class MainActivity : AppCompatActivity() {
         else if (active) Color.GREEN else Color.RED
     }
 
-    private fun getValueText(isKnown: Boolean, isActive: Boolean, type: String): String {
+    private fun getValueText(isKnown: Boolean, isActive: Boolean, type: String = ""): String {
         return if (!isKnown) "Unknown"
-        else if (!isActive) "Not active" else type
+        else if (!isActive) "Not active"
+        else if (type.isEmpty()) "Active" else type
     }
 }
