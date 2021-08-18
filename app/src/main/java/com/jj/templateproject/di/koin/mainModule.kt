@@ -24,7 +24,7 @@ val mainModule = module {
     single { AirplaneModeListener() }
     single<AirplaneModeManager> { AndroidAirplaneModeManager(get(), get(), get()) }
 
-    single<IDeviceStateManager> { DeviceStateManager(get(), get()) }
+    single<IDeviceStateManager> { DeviceStateManager(get(), get(), get()) }
 }
 
 val textModule = module {

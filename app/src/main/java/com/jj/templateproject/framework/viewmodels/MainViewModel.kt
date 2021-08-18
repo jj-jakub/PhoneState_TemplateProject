@@ -37,6 +37,7 @@ class MainViewModel : ViewModel() {
             DeviceStateChange.NETWORK -> mainViewStateFlow.value.copy(
                 networkViewState = createNetworkViewState(newDeviceState.networkState)
             )
+            DeviceStateChange.AIRPLANE -> return
             DeviceStateChange.NONE -> mainViewStateFlow.value
         }
 
