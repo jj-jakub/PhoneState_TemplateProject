@@ -10,7 +10,7 @@ import com.jj.templateproject.domain.network.NetworkState
 import com.jj.templateproject.domain.network.NetworkState.Connected
 import com.jj.templateproject.domain.network.NetworkState.NotConnected
 import com.jj.templateproject.domain.network.NetworkState.Unknown
-import com.jj.templateproject.framework.viewmodels.states.AirplaneViewState
+import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,7 +40,7 @@ class MainViewModel : ViewModel() {
                 networkViewState = createNetworkViewState(newDeviceState.networkState)
             )
             DeviceStateChange.AIRPLANE -> mainViewStateFlow.value.copy(
-                airplaneViewState = createAirplaneViewState(newDeviceState.airplaneModeState)
+                airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState)
             )
             DeviceStateChange.NONE -> mainViewStateFlow.value
         }
@@ -60,9 +60,9 @@ class MainViewModel : ViewModel() {
 
     private fun createAirplaneViewState(airplaneModeState: AirplaneModeState) =
         when (airplaneModeState) {
-            is AirplaneModeState.TurnedOn -> AirplaneViewState(isKnown = true, isActive = true)
-            is AirplaneModeState.TurnedOff -> AirplaneViewState(isKnown = true, isActive = false)
-            is AirplaneModeState.Unknown -> AirplaneViewState(isKnown = false)
+            is AirplaneModeState.TurnedOn -> AirplaneModeViewState(isKnown = true, isActive = true)
+            is AirplaneModeState.TurnedOff -> AirplaneModeViewState(isKnown = true, isActive = false)
+            is AirplaneModeState.Unknown -> AirplaneModeViewState(isKnown = false)
         }
 
     private fun changeMainViewStateFlow(mainViewState: MainViewState) {
