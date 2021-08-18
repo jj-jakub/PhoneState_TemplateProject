@@ -29,7 +29,7 @@ val mainModule = module {
 
     single { BluetoothModeListener() }
     single<BluetoothModeManager> { AndroidBluetoothModeManager(get(), get(), get()) }
-    single<DeviceStateManager> { AndroidDeviceStateManager(get(), get(), get()) }
+    single<DeviceStateManager> { AndroidDeviceStateManager(get(), get(), get(), get()) }
 }
 
 val textModule = module {
