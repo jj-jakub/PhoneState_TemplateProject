@@ -5,17 +5,19 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.jj.templateproject.data.utils.getAboutVersionText
+import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
 import com.jj.templateproject.framework.viewmodels.MainViewModel
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import kotlinx.coroutines.flow.collect
+import org.koin.java.KoinJavaComponent.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
 
     private val mainViewModel: MainViewModel by viewModels()
+    private val versionTextProvider: VersionTextProvider by inject(VersionTextProvider::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setMainLabelText() {
-        activityMainBinding.mainLabel.text = getAboutVersionText()
+        activityMainBinding.mainLabel.text = versionTextProvider.getAboutVersionText()
     }
 
     private fun getBackgroundColor(isKnown: Boolean, active: Boolean): Int {
