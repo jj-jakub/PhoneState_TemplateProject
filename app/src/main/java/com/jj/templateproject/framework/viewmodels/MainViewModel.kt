@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.data.device.DeviceState
 import com.jj.templateproject.data.device.DeviceStateChange
+import com.jj.templateproject.domain.airplanemode.AirplaneModeState
 import com.jj.templateproject.domain.device.IDeviceStateManager
 import com.jj.templateproject.domain.network.NetworkState
 import com.jj.templateproject.domain.network.NetworkState.Connected
 import com.jj.templateproject.domain.network.NetworkState.NotConnected
 import com.jj.templateproject.domain.network.NetworkState.Unknown
+import com.jj.templateproject.framework.viewmodels.states.AirplaneViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +39,9 @@ class MainViewModel : ViewModel() {
             DeviceStateChange.NETWORK -> mainViewStateFlow.value.copy(
                 networkViewState = createNetworkViewState(newDeviceState.networkState)
             )
-            DeviceStateChange.AIRPLANE -> return
+            DeviceStateChange.AIRPLANE -> mainViewStateFlow.value.copy(
+                airplaneViewState = createAirplaneViewState(newDeviceState.airplaneModeState)
+            )
             DeviceStateChange.NONE -> mainViewStateFlow.value
         }
 
@@ -53,6 +57,13 @@ class MainViewModel : ViewModel() {
         is NotConnected -> NetworkViewState(isKnown = true, isActive = false)
         is Unknown -> NetworkViewState(isKnown = false)
     }
+
+    private fun createAirplaneViewState(airplaneModeState: AirplaneModeState) =
+        when (airplaneModeState) {
+            is AirplaneModeState.TurnedOn -> AirplaneViewState(isKnown = true, isActive = true)
+            is AirplaneModeState.TurnedOff -> AirplaneViewState(isKnown = true, isActive = false)
+            is AirplaneModeState.Unknown -> AirplaneViewState(isKnown = false)
+        }
 
     private fun changeMainViewStateFlow(mainViewState: MainViewState) {
         mainViewStateFlow.value = mainViewState
