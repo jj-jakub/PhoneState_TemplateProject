@@ -100,7 +100,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun getValueText(isKnown: Boolean, isActive: Boolean, type: String = ""): String {
         return if (!isKnown) "Unknown"
-        else if (!isActive) "Not active"
-        else if (type.isEmpty()) "Active" else type
+        else if (type.isEmpty())
+            if (!isActive) "Not active"
+            else "Active"
+        else type
     }
 }
