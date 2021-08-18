@@ -15,6 +15,7 @@ class BluetoothModeListener : BroadcastReceiver() {
         val intentFilter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
     }
 
+    // TODO Naming - bluetoothMode and bluetoothModeChange or bluetooth and bluetoothChange
     private val bluetoothModeChangeFlow =
         MutableStateFlow<BluetoothModeChange>(BluetoothModeChange.Unknown)
 

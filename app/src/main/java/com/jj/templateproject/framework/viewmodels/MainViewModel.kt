@@ -73,6 +73,7 @@ class MainViewModel : ViewModel() {
             is AirplaneModeState.Unknown -> AirplaneModeViewState(isKnown = false)
         }
 
+    // TODO Maybe extract these creations
     private fun createBluetoothViewState(bluetoothModeState: BluetoothModeState) =
         when (bluetoothModeState) {
             is BluetoothModeState.TurningOn -> BluetoothViewState(

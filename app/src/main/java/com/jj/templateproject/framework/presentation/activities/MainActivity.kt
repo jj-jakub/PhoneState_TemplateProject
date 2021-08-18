@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // TODO Airplane icon should be green if mode is not active, do it without hack like !isActive
     private fun setupAirplaneModeViews(airplaneModeViewState: AirplaneModeViewState) {
         activityMainBinding.apply {
             airplaneModeStateIcon.setBackgroundColor(
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // TODO Think about smarter way to setup these views
     private fun setupNetworkViews(networkViewState: NetworkViewState) {
         activityMainBinding.apply {
             networkStateIcon.setBackgroundColor(
