@@ -5,7 +5,7 @@ import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
-import com.jj.templateproject.domain.device.IDeviceStateManager
+import com.jj.templateproject.domain.device.DeviceStateManager
 import com.jj.templateproject.domain.network.NetworkState
 import com.jj.templateproject.domain.network.NetworkState.Connected
 import com.jj.templateproject.domain.network.NetworkState.NotConnected
@@ -25,7 +25,7 @@ class MainViewModel : ViewModel() {
 
     fun observeMainViewState() = mainViewStateFlow.asStateFlow()
 
-    private val deviceStateManager: IDeviceStateManager by inject(IDeviceStateManager::class.java)
+    private val deviceStateManager: DeviceStateManager by inject(DeviceStateManager::class.java)
     private val coroutineScopeProvider: ICoroutineScopeProvider by inject(ICoroutineScopeProvider::class.java)
 
     init {
