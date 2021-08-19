@@ -8,5 +8,5 @@ data class DeviceState(
     val networkState: NetworkState = NetworkState.Unknown,
     val airplaneModeState: AirplaneModeState = AirplaneModeState.Unknown,
     val bluetoothState: BluetoothModeState = BluetoothModeState.Unknown,
-    val change: DeviceStateChange = DeviceStateChange.NONE
+    val change: DeviceStateChange = DeviceStateChange.None
 )

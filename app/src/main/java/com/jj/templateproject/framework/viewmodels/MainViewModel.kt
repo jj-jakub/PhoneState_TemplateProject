@@ -38,16 +38,16 @@ class MainViewModel : ViewModel() {
 
     private fun onDeviceStateChanged(newDeviceState: DeviceState) {
         val newMainViewState = when (newDeviceState.change) {
-            DeviceStateChange.NETWORK -> mainViewStateFlow.value.copy(
+            DeviceStateChange.Network -> mainViewStateFlow.value.copy(
                 networkViewState = createNetworkViewState(newDeviceState.networkState)
             )
-            DeviceStateChange.AIRPLANE -> mainViewStateFlow.value.copy(
+            DeviceStateChange.Airplane -> mainViewStateFlow.value.copy(
                 airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState)
             )
-            DeviceStateChange.BLUETOOTH -> mainViewStateFlow.value.copy(
+            DeviceStateChange.Bluetooth -> mainViewStateFlow.value.copy(
                 bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState)
             )
-            DeviceStateChange.NONE -> mainViewStateFlow.value
+            DeviceStateChange.None -> mainViewStateFlow.value
         }
 
         changeMainViewStateFlow(newMainViewState)

@@ -46,7 +46,7 @@ class AndroidDeviceStateManager(
     private fun onBluetoothStateChanged(bluetoothState: BluetoothModeState) {
         val newDeviceState = deviceStateFlow.value.copy(
             bluetoothState = bluetoothState,
-            change = DeviceStateChange.BLUETOOTH
+            change = DeviceStateChange.Bluetooth
         )
 
         changeDeviceStateFlow(newDeviceState)
@@ -55,7 +55,7 @@ class AndroidDeviceStateManager(
     private fun onNetworkStateChanged(networkState: NetworkState) {
         val newDeviceState = deviceStateFlow.value.copy(
             networkState = networkState,
-            change = DeviceStateChange.NETWORK
+            change = DeviceStateChange.Network
         )
         changeDeviceStateFlow(newDeviceState)
     }
@@ -63,7 +63,7 @@ class AndroidDeviceStateManager(
     private fun onAirplaneModeStateChanged(airplaneModeState: AirplaneModeState) {
         val newDeviceState = deviceStateFlow.value.copy(
             airplaneModeState = airplaneModeState,
-            change = DeviceStateChange.AIRPLANE
+            change = DeviceStateChange.Airplane
         )
         changeDeviceStateFlow(newDeviceState)
     }

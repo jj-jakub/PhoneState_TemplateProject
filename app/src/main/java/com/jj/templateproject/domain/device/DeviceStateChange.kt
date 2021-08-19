@@ -1,4 +1,8 @@
 package com.jj.templateproject.domain.device
 
-// TODO Convert to sealed class
-enum class DeviceStateChange { NETWORK, AIRPLANE, BLUETOOTH, NONE }
+sealed class DeviceStateChange {
+    object Network: DeviceStateChange()
+    object Airplane: DeviceStateChange()
+    object Bluetooth: DeviceStateChange()
+    object None: DeviceStateChange()
+}
