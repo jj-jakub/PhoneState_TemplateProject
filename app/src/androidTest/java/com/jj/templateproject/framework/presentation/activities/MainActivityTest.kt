@@ -1,13 +1,11 @@
 package com.jj.templateproject.framework.presentation.activities
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jj.templateproject.R
+import com.jj.templateproject.assertViewIsDisplayed
+import com.jj.templateproject.assertViewIsNotDisplayed
+import com.jj.templateproject.assertViewTextMatches
 import com.jj.templateproject.data.text.VersionTextProvider
 import org.junit.Rule
 import org.junit.Test
@@ -21,12 +19,40 @@ class MainActivityTest {
 
     @Test
     fun mainLayoutShouldBeVisible() {
-        onView(withId(R.id.mainLayout)).check(matches(isDisplayed()))
+        assertViewIsDisplayed(R.id.mainLayout)
     }
 
     @Test
     fun shouldShowProperInfoInMainLabel() {
         val expectedText = VersionTextProvider().getAboutVersionText()
-        onView(withId(R.id.mainLabel)).check(matches(withText(expectedText)))
+        assertViewTextMatches(R.id.mainLabel, expectedText)
+    }
+
+    @Test
+    fun networkRelatedViewsShouldBeVisible() {
+        assertViewIsDisplayed(R.id.networkStateIcon)
+        assertViewIsDisplayed(R.id.networkStateLabel)
+        assertViewIsDisplayed(R.id.networkStateValue)
+    }
+
+    @Test
+    fun bluetoothRelatedViewsShouldBeVisible() {
+        assertViewIsDisplayed(R.id.bluetoothStateIcon)
+        assertViewIsDisplayed(R.id.bluetoothStateLabel)
+        assertViewIsDisplayed(R.id.bluetoothStateValue)
+    }
+
+    @Test
+    fun airplaneModeRelatedViewsShouldBeVisible() {
+        assertViewIsDisplayed(R.id.airplaneModeStateIcon)
+        assertViewIsDisplayed(R.id.airplaneModeStateLabel)
+        assertViewIsDisplayed(R.id.airplaneModeStateValue)
+    }
+
+    @Test
+    fun gpsRelatedViewsShouldNOTBeVisible() {
+        assertViewIsNotDisplayed(R.id.gpsStateIcon)
+        assertViewIsNotDisplayed(R.id.gpsStateLabel)
+        assertViewIsNotDisplayed(R.id.gpsStateValue)
     }
 }
