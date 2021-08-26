@@ -3,16 +3,28 @@ package com.jj.templateproject.framework.presentation.activities
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jj.templateproject.R
-import com.jj.templateproject.assertViewIsDisplayed
-import com.jj.templateproject.assertViewIsNotDisplayed
-import com.jj.templateproject.assertViewTextMatches
 import com.jj.templateproject.data.text.VersionTextProvider
+import com.jj.templateproject.di.koin.mainModule
+import com.jj.templateproject.framework.presentation.activities.MainActivity
+import com.jj.templateproject.utils.assertViewIsDisplayed
+import com.jj.templateproject.utils.assertViewIsNotDisplayed
+import com.jj.templateproject.utils.assertViewTextMatches
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.loadKoinModules
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
+
+    companion object {
+        @BeforeClass
+        @JvmStatic
+        fun setup() {
+            loadKoinModules(mainModule)
+        }
+    }
 
     @get:Rule
     var rule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
