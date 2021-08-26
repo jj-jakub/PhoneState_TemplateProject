@@ -3,8 +3,8 @@ package com.jj.templateproject.framework.device
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
-import com.jj.templateproject.domain.bluetooth.BluetoothModeManager
-import com.jj.templateproject.domain.bluetooth.BluetoothModeState
+import com.jj.templateproject.domain.bluetooth.BluetoothStateManager
+import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class AndroidDeviceStateManager(
     networkManager: NetworkManager,
     airplaneModeManager: AirplaneModeManager,
-    bluetoothModeManager: BluetoothModeManager,
+    bluetoothStateManager: BluetoothStateManager,
     coroutineScopeProvider: ICoroutineScopeProvider
 ) : DeviceStateManager {
 
@@ -37,13 +37,13 @@ class AndroidDeviceStateManager(
         }
 
         coroutineScopeProvider.createIOScope().launch {
-            bluetoothModeManager.observeBluetoothState().collect {
+            bluetoothStateManager.observeBluetoothState().collect {
                 onBluetoothStateChanged(it)
             }
         }
     }
 
-    private fun onBluetoothStateChanged(bluetoothState: BluetoothModeState) {
+    private fun onBluetoothStateChanged(bluetoothState: BluetoothState) {
         val newDeviceState = deviceStateFlow.value.copy(
             bluetoothState = bluetoothState,
             change = DeviceStateChange.Bluetooth

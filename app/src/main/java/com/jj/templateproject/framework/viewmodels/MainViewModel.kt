@@ -3,7 +3,7 @@ package com.jj.templateproject.framework.viewmodels
 import androidx.lifecycle.ViewModel
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
-import com.jj.templateproject.domain.bluetooth.BluetoothModeState
+import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
@@ -74,21 +74,21 @@ class MainViewModel : ViewModel() {
         }
 
     // TODO Maybe extract these creations
-    private fun createBluetoothViewState(bluetoothModeState: BluetoothModeState) =
-        when (bluetoothModeState) {
-            is BluetoothModeState.TurningOn -> BluetoothViewState(
+    private fun createBluetoothViewState(bluetoothState: BluetoothState) =
+        when (bluetoothState) {
+            is BluetoothState.TurningOn -> BluetoothViewState(
                 isKnown = true, isActive = false, type = "Turning on"
             )
-            is BluetoothModeState.TurnedOn -> BluetoothViewState(
+            is BluetoothState.TurnedOn -> BluetoothViewState(
                 isKnown = true, isActive = true, type = "Turned on"
             )
-            is BluetoothModeState.TurningOff -> BluetoothViewState(
+            is BluetoothState.TurningOff -> BluetoothViewState(
                 isKnown = true, isActive = false, type = "Turning off"
             )
-            is BluetoothModeState.TurnedOff -> BluetoothViewState(
+            is BluetoothState.TurnedOff -> BluetoothViewState(
                 isKnown = true, isActive = false, type = "Turned off"
             )
-            is BluetoothModeState.NotAvailable -> BluetoothViewState(
+            is BluetoothState.NotAvailable -> BluetoothViewState(
                 isKnown = true, isActive = false, type = "Not available"
             )
             else -> BluetoothViewState(isKnown = false, isActive = false)
