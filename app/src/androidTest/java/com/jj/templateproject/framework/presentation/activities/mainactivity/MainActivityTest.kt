@@ -1,4 +1,4 @@
-package com.jj.templateproject.framework.presentation.activities
+package com.jj.templateproject.framework.presentation.activities.mainactivity
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
