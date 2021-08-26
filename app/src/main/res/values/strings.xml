@@ -11,4 +11,5 @@
     <string name="turning_on">Turning on</string>
     <string name="bluetooth_status">Bluetooth status</string>
     <string name="airplane_mode_status">Airplane mode status</string>
+    <string name="gps_status">GPS status</string>
 </resources>

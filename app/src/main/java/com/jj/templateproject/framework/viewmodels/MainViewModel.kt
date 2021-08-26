@@ -7,12 +7,14 @@ import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
+import com.jj.templateproject.domain.gps.GPSState
 import com.jj.templateproject.domain.network.NetworkState
 import com.jj.templateproject.domain.network.NetworkState.Connected
 import com.jj.templateproject.domain.network.NetworkState.NotConnected
 import com.jj.templateproject.domain.network.NetworkState.Unknown
 import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
 import com.jj.templateproject.framework.viewmodels.states.BluetoothViewState
+import com.jj.templateproject.framework.viewmodels.states.GPSViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,6 +48,9 @@ class MainViewModel : ViewModel() {
             )
             DeviceStateChange.Bluetooth -> mainViewStateFlow.value.copy(
                 bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState)
+            )
+            DeviceStateChange.GPS -> mainViewStateFlow.value.copy(
+                gpsViewState = createGPSViewState(newDeviceState.gpsState)
             )
             DeviceStateChange.None -> mainViewStateFlow.value
         }
@@ -85,6 +90,12 @@ class MainViewModel : ViewModel() {
             )
             else -> BluetoothViewState(isKnown = false, isActive = false)
         }
+
+    private fun createGPSViewState(gpsState: GPSState) = when(gpsState) {
+        is GPSState.TurnedOn -> GPSViewState(isKnown = true, isActive = true)
+        is GPSState.TurnedOff -> GPSViewState(isKnown = true, isActive = false)
+        is GPSState.Unknown -> GPSViewState(isKnown = false)
+    }
 
     private fun changeMainViewStateFlow(mainViewState: MainViewState) {
         mainViewStateFlow.value = mainViewState
