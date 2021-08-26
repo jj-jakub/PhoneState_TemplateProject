@@ -7,7 +7,6 @@ import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.di.koin.mainModule
 import com.jj.templateproject.framework.presentation.activities.MainActivity
 import com.jj.templateproject.utils.assertViewIsDisplayed
-import com.jj.templateproject.utils.assertViewIsNotDisplayed
 import com.jj.templateproject.utils.assertViewTextMatches
 import org.junit.BeforeClass
 import org.junit.Rule
@@ -62,9 +61,9 @@ class MainActivityTest {
     }
 
     @Test
-    fun gpsRelatedViewsShouldNOTBeVisible() {
-        assertViewIsNotDisplayed(R.id.gpsStateIcon)
-        assertViewIsNotDisplayed(R.id.gpsStateLabel)
-        assertViewIsNotDisplayed(R.id.gpsStateValue)
+    fun gpsRelatedViewsShouldBeVisible() {
+        assertViewIsDisplayed(R.id.gpsStateIcon)
+        assertViewIsDisplayed(R.id.gpsStateLabel)
+        assertViewIsDisplayed(R.id.gpsStateValue)
     }
 }

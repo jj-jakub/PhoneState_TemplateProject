@@ -8,6 +8,8 @@ import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
+import com.jj.templateproject.domain.gps.GPSManager
+import com.jj.templateproject.domain.gps.GPSState
 import com.jj.templateproject.domain.network.NetworkManager
 import com.jj.templateproject.domain.network.NetworkState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +21,7 @@ class AndroidDeviceStateManager(
     networkManager: NetworkManager,
     airplaneModeManager: AirplaneModeManager,
     bluetoothStateManager: BluetoothStateManager,
+    gpsManager: GPSManager,
     coroutineScopeProvider: ICoroutineScopeProvider
 ) : DeviceStateManager {
 
@@ -41,12 +44,25 @@ class AndroidDeviceStateManager(
                 onBluetoothStateChanged(it)
             }
         }
+
+        coroutineScopeProvider.createIOScope().launch {
+            gpsManager.observeGPSState().collect { onGPSStateChanged(it) }
+        }
     }
 
     private fun onBluetoothStateChanged(bluetoothState: BluetoothState) {
         val newDeviceState = deviceStateFlow.value.copy(
             bluetoothState = bluetoothState,
             change = DeviceStateChange.Bluetooth
+        )
+
+        changeDeviceStateFlow(newDeviceState)
+    }
+
+    private fun onGPSStateChanged(gpsState: GPSState) {
+        val newDeviceState = deviceStateFlow.value.copy(
+            gpsState = gpsState,
+            change = DeviceStateChange.GPS
         )
 
         changeDeviceStateFlow(newDeviceState)

@@ -12,6 +12,7 @@ import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.framework.viewmodels.MainViewModel
 import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
 import com.jj.templateproject.framework.viewmodels.states.BluetoothViewState
+import com.jj.templateproject.framework.viewmodels.states.GPSViewState
 import com.jj.templateproject.framework.viewmodels.states.MainViewState
 import com.jj.templateproject.framework.viewmodels.states.NetworkViewState
 import kotlinx.coroutines.flow.collect
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         setupNetworkViews(mainViewState.networkViewState)
         setupAirplaneModeViews(mainViewState.airplaneModeViewState)
         setupBluetoothViews(mainViewState.bluetoothViewState)
+        setupGPSViews(mainViewState.gpsViewState)
     }
 
     private fun setupBluetoothViews(bluetoothViewState: BluetoothViewState) {
@@ -70,6 +72,15 @@ class MainActivity : AppCompatActivity() {
             BluetoothState.TurningOff -> getString(R.string.turning_off)
             BluetoothState.TurningOn -> getString(R.string.turning_on)
         }
+
+    private fun setupGPSViews(gpsViewState: GPSViewState) {
+        activityMainBinding.apply {
+            gpsStateIcon.setBackgroundColor(
+                getBackgroundColor(gpsViewState.isKnown, gpsViewState.isActive)
+            )
+            gpsStateValue.text = getValueText(gpsViewState.isKnown, gpsViewState.isActive)
+        }
+    }
 
     // TODO Airplane icon should be green if mode is not active, do it without hack like !isActive
     private fun setupAirplaneModeViews(airplaneModeViewState: AirplaneModeViewState) {
