@@ -76,20 +76,12 @@ class MainViewModel : ViewModel() {
     // TODO Maybe extract these creations
     private fun createBluetoothViewState(bluetoothState: BluetoothState) =
         when (bluetoothState) {
-            is BluetoothState.TurningOn -> BluetoothViewState(
-                isKnown = true, isActive = false, type = "Turning on"
-            )
             is BluetoothState.TurnedOn -> BluetoothViewState(
-                isKnown = true, isActive = true, type = "Turned on"
+                isKnown = true, isActive = true, bluetoothState = bluetoothState
             )
-            is BluetoothState.TurningOff -> BluetoothViewState(
-                isKnown = true, isActive = false, type = "Turning off"
-            )
-            is BluetoothState.TurnedOff -> BluetoothViewState(
-                isKnown = true, isActive = false, type = "Turned off"
-            )
-            is BluetoothState.NotAvailable -> BluetoothViewState(
-                isKnown = true, isActive = false, type = "Not available"
+            is BluetoothState.TurningOn, BluetoothState.TurningOff, BluetoothState.TurnedOff,
+            BluetoothState.NotAvailable -> BluetoothViewState(
+                isKnown = true, isActive = false, bluetoothState = bluetoothState
             )
             else -> BluetoothViewState(isKnown = false, isActive = false)
         }

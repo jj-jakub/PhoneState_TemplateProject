@@ -4,4 +4,10 @@
     <string name="active">Active</string>
     <string name="not_active">Not active</string>
     <string name="unknown">Unknown</string>
+    <string name="not_available">Not available</string>
+    <string name="turned_off">Turned off</string>
+    <string name="turned_on">Turned on</string>
+    <string name="turning_off">Turning off</string>
+    <string name="turning_on">Turning on</string>
+    <string name="bluetooth_status">Bluetooth status</string>
 </resources>
