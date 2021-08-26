@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.jj.templateproject.R.string
+import com.jj.templateproject.R
 import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
+import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.framework.viewmodels.MainViewModel
 import com.jj.templateproject.framework.viewmodels.states.AirplaneModeViewState
 import com.jj.templateproject.framework.viewmodels.states.BluetoothViewState
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBluetoothViews(bluetoothViewState: BluetoothViewState) {
+        val type = getBluetoothType(bluetoothViewState)
         activityMainBinding.apply {
             bluetoothStateIcon.setBackgroundColor(
                 getBackgroundColor(
@@ -54,10 +56,20 @@ class MainActivity : AppCompatActivity() {
             bluetoothStateValue.text = getValueText(
                 bluetoothViewState.isKnown,
                 bluetoothViewState.isActive,
-                bluetoothViewState.type
+                type
             )
         }
     }
+
+    private fun getBluetoothType(bluetoothViewState: BluetoothViewState): String =
+        when (bluetoothViewState.bluetoothState) {
+            is BluetoothState.Unknown -> getString(R.string.unknown)
+            BluetoothState.NotAvailable -> getString(R.string.not_available)
+            BluetoothState.TurnedOff -> getString(R.string.turned_off)
+            BluetoothState.TurnedOn -> getString(R.string.turned_on)
+            BluetoothState.TurningOff -> getString(R.string.turning_off)
+            BluetoothState.TurningOn -> getString(R.string.turning_on)
+        }
 
     // TODO Airplane icon should be green if mode is not active, do it without hack like !isActive
     private fun setupAirplaneModeViews(airplaneModeViewState: AirplaneModeViewState) {
@@ -102,10 +114,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getValueText(isKnown: Boolean, isActive: Boolean, type: String = ""): String {
-        return if (!isKnown) getString(string.unknown)
+        return if (!isKnown) getString(R.string.unknown)
         else if (type.isEmpty())
-            if (!isActive) getString(string.not_active)
-            else getString(string.active)
+            if (!isActive) getString(R.string.not_active)
+            else getString(R.string.active)
         else type
     }
 }
