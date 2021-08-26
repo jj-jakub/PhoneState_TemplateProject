@@ -3,24 +3,24 @@ package com.jj.templateproject.framework.bluetooth
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
-import com.jj.templateproject.domain.bluetooth.BluetoothModeChange
-import com.jj.templateproject.domain.bluetooth.BluetoothModeManager
-import com.jj.templateproject.domain.bluetooth.BluetoothModeState
+import com.jj.templateproject.domain.bluetooth.BluetoothChange
+import com.jj.templateproject.domain.bluetooth.BluetoothStateManager
+import com.jj.templateproject.domain.bluetooth.BluetoothState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class AndroidBluetoothModeManager(
+class AndroidBluetoothStateManager(
     private val context: Context,
-    private val bluetoothModeListener: BluetoothModeListener,
+    private val bluetoothStateListener: BluetoothStateListener,
     private val coroutineScopeProvider: ICoroutineScopeProvider
-) : BluetoothModeManager {
+) : BluetoothStateManager {
 
-    private val bluetoothModeStateFlow =
-        MutableStateFlow<BluetoothModeState>(BluetoothModeState.Unknown)
+    private val bluetoothStateFlow =
+        MutableStateFlow<BluetoothState>(BluetoothState.Unknown)
 
-    override fun observeBluetoothState() = bluetoothModeStateFlow.asStateFlow()
+    override fun observeBluetoothState() = bluetoothStateFlow.asStateFlow()
 
     init {
         checkInitialBluetoothState()
@@ -30,40 +30,40 @@ class AndroidBluetoothModeManager(
 
     private fun checkInitialBluetoothState() {
         val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        val bluetoothModeState = when {
-            bluetoothAdapter == null -> BluetoothModeState.NotAvailable
-            bluetoothAdapter.isEnabled -> BluetoothModeState.TurnedOn
-            else -> BluetoothModeState.TurnedOff
+        val bluetoothState = when {
+            bluetoothAdapter == null -> BluetoothState.NotAvailable
+            bluetoothAdapter.isEnabled -> BluetoothState.TurnedOn
+            else -> BluetoothState.TurnedOff
         }
 
-        changeBluetoothModeStateFlow(bluetoothModeState)
+        changeBluetoothStateFlow(bluetoothState)
     }
 
     private fun registerBluetoothCallback() {
-        context.registerReceiver(bluetoothModeListener, BluetoothModeListener.intentFilter)
+        context.registerReceiver(bluetoothStateListener, BluetoothStateListener.intentFilter)
     }
 
     private fun observeBluetoothChanges() {
         coroutineScopeProvider.createIOScope().launch {
-            bluetoothModeListener.observeBluetoothModeChangeFlow().collect {
-                onBluetoothModeChanged(it)
+            bluetoothStateListener.observeBluetoothChangeFlow().collect {
+                onBluetoothStateChanged(it)
             }
         }
     }
 
-    private fun onBluetoothModeChanged(bluetoothModeChange: BluetoothModeChange) {
-        val bluetoothModeState = when (bluetoothModeChange) {
-            is BluetoothModeChange.TurningOn -> BluetoothModeState.TurningOn
-            is BluetoothModeChange.TurnedOn -> BluetoothModeState.TurnedOn
-            is BluetoothModeChange.TurningOff -> BluetoothModeState.TurningOff
-            is BluetoothModeChange.TurnedOff -> BluetoothModeState.TurnedOff
+    private fun onBluetoothStateChanged(bluetoothChange: BluetoothChange) {
+        val bluetoothState = when (bluetoothChange) {
+            is BluetoothChange.TurningOn -> BluetoothState.TurningOn
+            is BluetoothChange.TurnedOn -> BluetoothState.TurnedOn
+            is BluetoothChange.TurningOff -> BluetoothState.TurningOff
+            is BluetoothChange.TurnedOff -> BluetoothState.TurnedOff
             else -> return
         }
 
-        changeBluetoothModeStateFlow(bluetoothModeState)
+        changeBluetoothStateFlow(bluetoothState)
     }
 
-    private fun changeBluetoothModeStateFlow(bluetoothModeState: BluetoothModeState) {
-        bluetoothModeStateFlow.value = bluetoothModeState
+    private fun changeBluetoothStateFlow(bluetoothState: BluetoothState) {
+        bluetoothStateFlow.value = bluetoothState
     }
 }
