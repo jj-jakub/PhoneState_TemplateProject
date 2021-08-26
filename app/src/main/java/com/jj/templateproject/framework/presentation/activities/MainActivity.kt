@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.jj.templateproject.R.string
 import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
 import com.jj.templateproject.framework.viewmodels.MainViewModel
@@ -101,10 +102,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getValueText(isKnown: Boolean, isActive: Boolean, type: String = ""): String {
-        return if (!isKnown) "Unknown"
+        return if (!isKnown) getString(string.unknown)
         else if (type.isEmpty())
-            if (!isActive) "Not active"
-            else "Active"
+            if (!isActive) getString(string.not_active)
+            else getString(string.active)
         else type
     }
 }
