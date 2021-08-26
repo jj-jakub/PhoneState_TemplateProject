@@ -1,4 +1,4 @@
-package com.jj.templateproject.framework.presentation.activities
+package com.jj.templateproject.framework.presentation.activities.mainactivity
 
 import android.graphics.Color
 import androidx.test.core.app.ActivityScenario
@@ -6,6 +6,7 @@ import com.jj.templateproject.R
 import com.jj.templateproject.di.koin.mainModule
 import com.jj.templateproject.domain.network.NetworkManager
 import com.jj.templateproject.domain.network.NetworkState
+import com.jj.templateproject.framework.presentation.activities.MainActivity
 import com.jj.templateproject.utils.assertBackgroundColorMatches
 import com.jj.templateproject.utils.assertViewTextMatches
 import io.mockk.MockKAnnotations
@@ -18,7 +19,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.koin.core.context.loadKoinModules
-import org.koin.core.context.stopKoin
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
