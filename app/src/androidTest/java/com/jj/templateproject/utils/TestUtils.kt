@@ -6,6 +6,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import org.hamcrest.Matchers.not
 
+const val DELAY_AFTER_CHANGE_EMIT = 500L
 
 fun assertViewIsDisplayed(id: Int) {
     Espresso.onView(ViewMatchers.withId(id))

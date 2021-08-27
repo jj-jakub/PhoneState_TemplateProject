@@ -4,9 +4,11 @@ import android.graphics.Color
 import androidx.test.core.app.ActivityScenario
 import com.jj.templateproject.R
 import com.jj.templateproject.di.koin.mainModule
+import com.jj.templateproject.domain.airplanemode.AirplaneModeState
 import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.bluetooth.BluetoothStateManager
 import com.jj.templateproject.framework.presentation.activities.MainActivity
+import com.jj.templateproject.utils.DELAY_AFTER_CHANGE_EMIT
 import com.jj.templateproject.utils.assertBackgroundColorMatches
 import com.jj.templateproject.utils.assertViewTextMatches
 import io.mockk.MockKAnnotations
@@ -61,7 +63,7 @@ class MainActivityBluetoothChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnBluetoothTurnedOn() {
-        bluetoothStateFlow.value = BluetoothState.TurnedOn
+        changeBluetoothStateFlow(BluetoothState.TurnedOn)
 
         assertViewTextMatches(R.id.bluetoothStateLabel, R.string.bluetooth_status)
         assertViewTextMatches(R.id.bluetoothStateValue, R.string.turned_on)
@@ -71,7 +73,7 @@ class MainActivityBluetoothChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnBluetoothTurnedOff() {
-        bluetoothStateFlow.value = BluetoothState.TurnedOff
+        changeBluetoothStateFlow(BluetoothState.TurnedOff)
 
         assertViewTextMatches(R.id.bluetoothStateLabel, R.string.bluetooth_status)
         assertViewTextMatches(R.id.bluetoothStateValue, R.string.turned_off)
@@ -81,7 +83,7 @@ class MainActivityBluetoothChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnBluetoothStateUnknown() {
-        bluetoothStateFlow.value = BluetoothState.Unknown
+        changeBluetoothStateFlow(BluetoothState.Unknown)
 
         assertViewTextMatches(R.id.bluetoothStateLabel, R.string.bluetooth_status)
         assertViewTextMatches(R.id.bluetoothStateValue, R.string.unknown)
@@ -91,7 +93,7 @@ class MainActivityBluetoothChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnBluetoothTurningOn() {
-        bluetoothStateFlow.value = BluetoothState.TurningOn
+        changeBluetoothStateFlow(BluetoothState.TurningOn)
 
         assertViewTextMatches(R.id.bluetoothStateLabel, R.string.bluetooth_status)
         assertViewTextMatches(R.id.bluetoothStateValue, R.string.turning_on)
@@ -101,12 +103,17 @@ class MainActivityBluetoothChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnBluetoothTurningOff() {
-        bluetoothStateFlow.value = BluetoothState.TurningOff
+        changeBluetoothStateFlow(BluetoothState.TurningOff)
 
         assertViewTextMatches(R.id.bluetoothStateLabel, R.string.bluetooth_status)
         assertViewTextMatches(R.id.bluetoothStateValue, R.string.turning_off)
         assertBackgroundColorMatches(R.id.bluetoothStateIcon, Color.RED)
         verify(exactly = 1) { bluetoothStateManager.observeBluetoothState() }
+    }
+
+    private fun changeBluetoothStateFlow(bluetoothState: BluetoothState) {
+        bluetoothStateFlow.value = bluetoothState
+        Thread.sleep(DELAY_AFTER_CHANGE_EMIT)
     }
 
     @After

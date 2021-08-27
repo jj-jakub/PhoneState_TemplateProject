@@ -7,6 +7,7 @@ import com.jj.templateproject.di.koin.mainModule
 import com.jj.templateproject.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
 import com.jj.templateproject.framework.presentation.activities.MainActivity
+import com.jj.templateproject.utils.DELAY_AFTER_CHANGE_EMIT
 import com.jj.templateproject.utils.assertBackgroundColorMatches
 import com.jj.templateproject.utils.assertViewTextMatches
 import io.mockk.MockKAnnotations
@@ -61,7 +62,7 @@ class MainActivityAirplaneModeChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnAirplaneModeStateOn() {
-        airplaneModeStateFlow.value = AirplaneModeState.TurnedOn
+        changeAirplaneModeStateFlow(AirplaneModeState.TurnedOn)
 
         assertViewTextMatches(R.id.airplaneModeStateLabel, R.string.airplane_mode_status)
         assertViewTextMatches(R.id.airplaneModeStateValue, R.string.active)
@@ -71,7 +72,7 @@ class MainActivityAirplaneModeChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnAirplaneModeStateOff() {
-        airplaneModeStateFlow.value = AirplaneModeState.TurnedOff
+        changeAirplaneModeStateFlow(AirplaneModeState.TurnedOff)
 
         assertViewTextMatches(R.id.airplaneModeStateLabel, R.string.airplane_mode_status)
         assertViewTextMatches(R.id.airplaneModeStateValue, R.string.not_active)
@@ -81,12 +82,17 @@ class MainActivityAirplaneModeChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnAirplaneModeStateUnknown() {
-        airplaneModeStateFlow.value = AirplaneModeState.Unknown
+        changeAirplaneModeStateFlow(AirplaneModeState.Unknown)
 
         assertViewTextMatches(R.id.airplaneModeStateLabel, R.string.airplane_mode_status)
         assertViewTextMatches(R.id.airplaneModeStateValue, R.string.unknown)
         assertBackgroundColorMatches(R.id.airplaneModeStateIcon, Color.GRAY)
         verify(exactly = 1) { airplaneModeManager.observeAirplaneModeState() }
+    }
+
+    private fun changeAirplaneModeStateFlow(airplaneModeState: AirplaneModeState) {
+        airplaneModeStateFlow.value = airplaneModeState
+        Thread.sleep(DELAY_AFTER_CHANGE_EMIT)
     }
 
     @After

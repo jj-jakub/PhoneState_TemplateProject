@@ -4,9 +4,11 @@ import android.graphics.Color
 import androidx.test.core.app.ActivityScenario
 import com.jj.templateproject.R
 import com.jj.templateproject.di.koin.mainModule
+import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.gps.GPSManager
 import com.jj.templateproject.domain.gps.GPSState
 import com.jj.templateproject.framework.presentation.activities.MainActivity
+import com.jj.templateproject.utils.DELAY_AFTER_CHANGE_EMIT
 import com.jj.templateproject.utils.assertBackgroundColorMatches
 import com.jj.templateproject.utils.assertViewTextMatches
 import io.mockk.MockKAnnotations
@@ -61,7 +63,7 @@ class MainActivityGPSChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnGPSStateOn() {
-        gpsStateFlow.value = GPSState.TurnedOn
+        changeGPSStateFlow(GPSState.TurnedOn)
 
         assertViewTextMatches(R.id.gpsStateLabel, R.string.gps_status)
         assertViewTextMatches(R.id.gpsStateValue, R.string.active)
@@ -71,7 +73,7 @@ class MainActivityGPSChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnGPSStateOff() {
-        gpsStateFlow.value = GPSState.TurnedOff
+        changeGPSStateFlow(GPSState.TurnedOff)
 
         assertViewTextMatches(R.id.gpsStateLabel, R.string.gps_status)
         assertViewTextMatches(R.id.gpsStateValue, R.string.not_active)
@@ -81,12 +83,17 @@ class MainActivityGPSChangesTest : KoinTest {
 
     @Test
     fun checkViewsCorrectnessOnGPSStateUnknown() {
-        gpsStateFlow.value = GPSState.Unknown
+        changeGPSStateFlow(GPSState.Unknown)
 
         assertViewTextMatches(R.id.gpsStateLabel, R.string.gps_status)
         assertViewTextMatches(R.id.gpsStateValue, R.string.unknown)
         assertBackgroundColorMatches(R.id.gpsStateIcon, Color.GRAY)
         verify(exactly = 1) { gpsManager.observeGPSState() }
+    }
+
+    private fun changeGPSStateFlow(gpsState: GPSState) {
+        gpsStateFlow.value = gpsState
+        Thread.sleep(DELAY_AFTER_CHANGE_EMIT)
     }
 
     @After

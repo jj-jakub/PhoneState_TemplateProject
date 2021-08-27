@@ -4,9 +4,11 @@ import android.graphics.Color
 import androidx.test.core.app.ActivityScenario
 import com.jj.templateproject.R
 import com.jj.templateproject.di.koin.mainModule
+import com.jj.templateproject.domain.gps.GPSState
 import com.jj.templateproject.domain.network.NetworkManager
 import com.jj.templateproject.domain.network.NetworkState
 import com.jj.templateproject.framework.presentation.activities.MainActivity
+import com.jj.templateproject.utils.DELAY_AFTER_CHANGE_EMIT
 import com.jj.templateproject.utils.assertBackgroundColorMatches
 import com.jj.templateproject.utils.assertViewTextMatches
 import io.mockk.MockKAnnotations
@@ -60,9 +62,9 @@ class MainActivityNetworkChangesTest : KoinTest {
     }
 
     @Test
-    fun checkViewsCorrectnessOnWiFiStateOn() {
+    fun checkViewsCorrectnessOnNetworkStateOn() {
         val networkName = "MockNetworkName"
-        networkStateFlow.value = NetworkState.Connected(networkName)
+        changeNetworkStateFlow(NetworkState.Connected(networkName))
 
         assertViewTextMatches(R.id.networkStateLabel, R.string.network_status)
         assertViewTextMatches(R.id.networkStateValue, networkName)
@@ -71,8 +73,8 @@ class MainActivityNetworkChangesTest : KoinTest {
     }
 
     @Test
-    fun checkViewsCorrectnessOnWiFiStateOff() {
-        networkStateFlow.value = NetworkState.NotConnected
+    fun checkViewsCorrectnessOnNetworkStateOff() {
+        changeNetworkStateFlow(NetworkState.NotConnected)
 
         assertViewTextMatches(R.id.networkStateLabel, R.string.network_status)
         assertViewTextMatches(R.id.networkStateValue, R.string.not_active)
@@ -81,13 +83,18 @@ class MainActivityNetworkChangesTest : KoinTest {
     }
 
     @Test
-    fun checkViewsCorrectnessOnWiFiStateUnknown() {
-        networkStateFlow.value = NetworkState.Unknown
+    fun checkViewsCorrectnessOnNetworkStateUnknown() {
+        changeNetworkStateFlow(NetworkState.Unknown)
 
         assertViewTextMatches(R.id.networkStateLabel, R.string.network_status)
         assertViewTextMatches(R.id.networkStateValue, R.string.unknown)
         assertBackgroundColorMatches(R.id.networkStateIcon, Color.GRAY)
         verify(exactly = 1) { networkManager.observeNetworkState() }
+    }
+
+    private fun changeNetworkStateFlow(networkState: NetworkState) {
+        networkStateFlow.value = networkState
+        Thread.sleep(DELAY_AFTER_CHANGE_EMIT)
     }
 
     @After
