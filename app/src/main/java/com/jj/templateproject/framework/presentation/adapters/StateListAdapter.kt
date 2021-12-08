@@ -1,29 +1,23 @@
 package com.jj.templateproject.framework.presentation.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jj.templateproject.databinding.StatesRowNetworkLayoutBinding
+import com.jj.templateproject.framework.presentation.adapters.statelistitems.StateListItemData
+import com.jj.templateproject.framework.presentation.adapters.statelistitems.StatesViewTypes
 import com.jj.templateproject.framework.presentation.viewholders.StatesRowNetworkViewHolder
-
-object StatesViewTypes {
-    const val TYPE_1 = 135
-    const val TYPE_2 = 241135512
-}
-
-interface StateListItemData {
-    val isKnown: Boolean
-    val isActive: Boolean
-    val name: String
-    val additionalInfo: String
-}
 
 class StateListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items: ArrayList<StateListItemData> = arrayListOf()
 
+    override fun getItemViewType(position: Int): Int = items[position].type
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        Log.d("ABAB", "ViewType: $viewType")
         return when (viewType) {
             StatesViewTypes.TYPE_1 -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
             StatesViewTypes.TYPE_2 -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
@@ -33,6 +27,7 @@ class StateListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
+        Log.d("ABAB", "position: $position")
 
         when (holder) {
             is StatesRowNetworkViewHolder -> holder.bind(item)

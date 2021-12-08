@@ -3,7 +3,7 @@ package com.jj.templateproject.framework.presentation.viewholders
 import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.jj.templateproject.databinding.StatesRowNetworkLayoutBinding
-import com.jj.templateproject.framework.presentation.adapters.StateListItemData
+import com.jj.templateproject.framework.presentation.adapters.statelistitems.StateListItemData
 
 class StatesRowNetworkViewHolder(private val binding: StatesRowNetworkLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
