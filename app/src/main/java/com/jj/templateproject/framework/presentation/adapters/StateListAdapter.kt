@@ -5,10 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.jj.templateproject.databinding.StatesRowDefaultLayoutBinding
+import com.jj.templateproject.databinding.StatesRowFourthLayoutBinding
 import com.jj.templateproject.databinding.StatesRowNetworkLayoutBinding
+import com.jj.templateproject.databinding.StatesRowSecondLayoutBinding
+import com.jj.templateproject.databinding.StatesRowThirdLayoutBinding
 import com.jj.templateproject.framework.presentation.adapters.statelistitems.StateListItemData
 import com.jj.templateproject.framework.presentation.adapters.statelistitems.StatesViewTypes
+import com.jj.templateproject.framework.presentation.viewholders.StatesRowDefaultViewHolder
+import com.jj.templateproject.framework.presentation.viewholders.StatesRowFourthViewHolder
 import com.jj.templateproject.framework.presentation.viewholders.StatesRowNetworkViewHolder
+import com.jj.templateproject.framework.presentation.viewholders.StatesRowSecondViewHolder
+import com.jj.templateproject.framework.presentation.viewholders.StatesRowThirdViewHolder
 
 class StateListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -17,20 +25,23 @@ class StateListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int = items[position].type
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("ABAB", "ViewType: $viewType")
         return when (viewType) {
             StatesViewTypes.TYPE_1 -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
-            StatesViewTypes.TYPE_2 -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
-            else -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
+            StatesViewTypes.TYPE_2 -> StatesRowSecondViewHolder(parent.createBinding(StatesRowSecondLayoutBinding::inflate))
+            StatesViewTypes.TYPE_3 -> StatesRowThirdViewHolder(parent.createBinding(StatesRowThirdLayoutBinding::inflate))
+            StatesViewTypes.TYPE_4 -> StatesRowFourthViewHolder(parent.createBinding(StatesRowFourthLayoutBinding::inflate))
+            else -> StatesRowDefaultViewHolder(parent.createBinding(StatesRowDefaultLayoutBinding::inflate))
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
-        Log.d("ABAB", "position: $position")
-
         when (holder) {
             is StatesRowNetworkViewHolder -> holder.bind(item)
+            is StatesRowSecondViewHolder -> holder.bind(item)
+            is StatesRowThirdViewHolder -> holder.bind(item)
+            is StatesRowFourthViewHolder -> holder.bind(item)
+            is StatesRowDefaultViewHolder -> holder.bind(item)
         }
     }
 
