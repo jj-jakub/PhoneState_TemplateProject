@@ -1,12 +1,9 @@
 package com.jj.templateproject.framework.viewmodels
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
 import com.jj.templateproject.domain.bluetooth.BluetoothState
 import com.jj.templateproject.domain.device.DeviceState
-import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager
 import com.jj.templateproject.domain.gps.GPSState
 import com.jj.templateproject.domain.network.NetworkState
@@ -24,7 +21,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
 
-class PhoneStateViewModel: BaseViewModel() {
+class PhoneStateViewModel : BaseViewModel() {
 
     private val phoneStateViewStateFlow = MutableStateFlow(MainViewState())
 
@@ -39,21 +36,12 @@ class PhoneStateViewModel: BaseViewModel() {
     }
 
     private fun onDeviceStateChanged(newDeviceState: DeviceState) {
-        val newMainViewState = when (newDeviceState.change) {
-            DeviceStateChange.Network -> phoneStateViewStateFlow.value.copy(
-                networkViewState = createNetworkViewState(newDeviceState.networkState)
-            )
-            DeviceStateChange.Airplane -> phoneStateViewStateFlow.value.copy(
-                airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState)
-            )
-            DeviceStateChange.Bluetooth -> phoneStateViewStateFlow.value.copy(
-                bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState)
-            )
-            DeviceStateChange.GPS -> phoneStateViewStateFlow.value.copy(
-                gpsViewState = createGPSViewState(newDeviceState.gpsState)
-            )
-            DeviceStateChange.None -> phoneStateViewStateFlow.value
-        }
+        val newMainViewState = phoneStateViewStateFlow.value.copy(
+            networkViewState = createNetworkViewState(newDeviceState.networkState),
+            airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState),
+            bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState),
+            gpsViewState = createGPSViewState(newDeviceState.gpsState)
+        )
 
         changePhoneStateViewStateFlow(newMainViewState)
     }
@@ -91,7 +79,7 @@ class PhoneStateViewModel: BaseViewModel() {
             else -> BluetoothViewState(isKnown = false, isActive = false)
         }
 
-    private fun createGPSViewState(gpsState: GPSState) = when(gpsState) {
+    private fun createGPSViewState(gpsState: GPSState) = when (gpsState) {
         is GPSState.TurnedOn -> GPSViewState(isKnown = true, isActive = true)
         is GPSState.TurnedOff -> GPSViewState(isKnown = true, isActive = false)
         is GPSState.Unknown -> GPSViewState(isKnown = false)
