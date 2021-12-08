@@ -3,8 +3,8 @@ package com.jj.templateproject.framework.device
 import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.domain.airplanemode.AirplaneModeState
-import com.jj.templateproject.domain.bluetooth.BluetoothStateManager
 import com.jj.templateproject.domain.bluetooth.BluetoothState
+import com.jj.templateproject.domain.bluetooth.BluetoothStateManager
 import com.jj.templateproject.domain.device.DeviceState
 import com.jj.templateproject.domain.device.DeviceStateChange
 import com.jj.templateproject.domain.device.DeviceStateManager

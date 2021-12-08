@@ -6,7 +6,6 @@ import com.jj.templateproject.data.coroutines.ICoroutineScopeProvider
 import com.jj.templateproject.domain.gps.GPSChange
 import com.jj.templateproject.domain.gps.GPSChange.TurnedOff
 import com.jj.templateproject.domain.gps.GPSChange.TurnedOn
-import com.jj.templateproject.domain.gps.GPSChange.Unknown
 import com.jj.templateproject.domain.gps.GPSManager
 import com.jj.templateproject.domain.gps.GPSState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,7 +41,7 @@ class AndroidGPSManager(
         val gpsState = when (gpsChange) {
             is TurnedOn -> GPSState.TurnedOn
             TurnedOff -> GPSState.TurnedOff
-            Unknown -> GPSState.Unknown
+            else -> gpsStateFlow.value
         }
 
         changeGPSStateFlow(gpsState)
