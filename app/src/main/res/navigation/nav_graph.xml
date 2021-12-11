@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/phoneStateFragment"
-        android:name="com.jj.templateproject.framework.presentation.fragments.PhoneStateFragment"
+        android:name="com.jj.templateproject.core.framework.presentation.fragments.PhoneStateFragment"
         android:label="PhoneStateFragment" />
 
     <fragment
         android:id="@+id/statesListFragment"
-        android:name="com.jj.templateproject.framework.presentation.fragments.StatesListFragment"
+        android:name="com.jj.templateproject.core.framework.presentation.fragments.StatesListFragment"
         android:label="StatesListFragment" />
 
 </navigation>

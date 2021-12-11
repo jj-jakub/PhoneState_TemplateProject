@@ -8,7 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.jj.templateproject.R
 import com.jj.templateproject.data.text.VersionTextProvider
 import com.jj.templateproject.databinding.ActivityMainBinding
-import com.jj.templateproject.framework.viewmodels.MainViewModel
+import com.jj.templateproject.core.framework.presentation.viewmodels.MainViewModel
 import org.koin.java.KoinJavaComponent.inject
 
 class MainActivity : AppCompatActivity() {

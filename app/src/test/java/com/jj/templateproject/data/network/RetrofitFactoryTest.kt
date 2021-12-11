@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test
 
 class RetrofitFactoryTest {
 
-    private lateinit var serviceFactory: RetrofitFactory
+    private lateinit var serviceFactory: com.jj.templateproject.core.data.network.RetrofitFactory
 
     @BeforeEach
     fun setup() {
-        serviceFactory = RetrofitFactory()
+        serviceFactory = com.jj.templateproject.core.data.network.RetrofitFactory()
     }
 
     @Test
