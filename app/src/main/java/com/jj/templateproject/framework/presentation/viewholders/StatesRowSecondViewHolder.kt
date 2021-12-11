@@ -1,9 +1,11 @@
 package com.jj.templateproject.framework.presentation.viewholders
 
 import android.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jj.templateproject.databinding.StatesRowSecondLayoutBinding
 import com.jj.templateproject.framework.presentation.adapters.statelistitems.StateListItemData
+import com.jj.templateproject.framework.presentation.adapters.statelistitems.color
 
 class StatesRowSecondViewHolder(private val binding: StatesRowSecondLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -13,6 +15,7 @@ class StatesRowSecondViewHolder(private val binding: StatesRowSecondLayoutBindin
             secondStateIcon2.setBackgroundColor(getBackgroundColor(item.isKnown, item.isActive))
             secondStateLabel.text = item.name
             secondStateValue.text = item.additionalInfo
+            secondAdditionalValue.setTextColor(ContextCompat.getColor(binding.root.context, item.type.color))
         }
     }
 
