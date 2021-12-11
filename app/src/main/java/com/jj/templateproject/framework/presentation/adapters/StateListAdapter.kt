@@ -1,6 +1,5 @@
 package com.jj.templateproject.framework.presentation.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,14 +21,14 @@ class StateListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items: ArrayList<StateListItemData> = arrayListOf()
 
-    override fun getItemViewType(position: Int): Int = items[position].type
+    override fun getItemViewType(position: Int): Int = items[position].type.id
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            StatesViewTypes.TYPE_1 -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
-            StatesViewTypes.TYPE_2 -> StatesRowSecondViewHolder(parent.createBinding(StatesRowSecondLayoutBinding::inflate))
-            StatesViewTypes.TYPE_3 -> StatesRowThirdViewHolder(parent.createBinding(StatesRowThirdLayoutBinding::inflate))
-            StatesViewTypes.TYPE_4 -> StatesRowFourthViewHolder(parent.createBinding(StatesRowFourthLayoutBinding::inflate))
+            StatesViewTypes.Type1.id -> StatesRowNetworkViewHolder(parent.createBinding(StatesRowNetworkLayoutBinding::inflate))
+            StatesViewTypes.Type2.id -> StatesRowSecondViewHolder(parent.createBinding(StatesRowSecondLayoutBinding::inflate))
+            StatesViewTypes.Type3.id -> StatesRowThirdViewHolder(parent.createBinding(StatesRowThirdLayoutBinding::inflate))
+            StatesViewTypes.Type4.id -> StatesRowFourthViewHolder(parent.createBinding(StatesRowFourthLayoutBinding::inflate))
             else -> StatesRowDefaultViewHolder(parent.createBinding(StatesRowDefaultLayoutBinding::inflate))
         }
     }

@@ -5,5 +5,5 @@ interface StateListItemData {
     val isActive: Boolean
     val name: String
     val additionalInfo: String
-    val type: Int
+    val type: StatesViewTypes
 }
