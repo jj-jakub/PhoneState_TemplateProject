@@ -13,5 +13,9 @@
         android:id="@+id/statesListFragment"
         android:name="com.jj.templateproject.core.framework.presentation.fragments.StatesListFragment"
         android:label="StatesListFragment" />
+    <fragment
+        android:id="@+id/apiResultsFragment"
+        android:name="com.jj.templateproject.networking.framework.presentation.fragments.ApiResultsFragment"
+        android:label="ApiResultsFragment" />
 
 </navigation>

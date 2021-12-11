@@ -10,4 +10,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="Second fragment" />
+    <item
+        android:id="@+id/apiResultsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="API results" />
 </menu>
