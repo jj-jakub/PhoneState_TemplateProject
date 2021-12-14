@@ -20,9 +20,9 @@ class ApiResultsViewModel(private val fishDataRepository: FishDataRepository) : 
     fun fetchSpecies() {
         viewModelScope.launch {
             stateMutableLiveData.value = ViewState(true)
+            // TODO Handle error by repo
             try {
-                val species = fishDataRepository.fetchAllSpecies()
-                Log.d("ABAB", "Species: ${species.result.last()}")
+                fishDataRepository.fetchSpecifiedSpeciesInfo("red-snapper")
             } catch (e: Exception) {
                 Log.e("ABAB", "e", e)
             }

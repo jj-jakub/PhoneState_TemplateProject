@@ -7,9 +7,13 @@ import com.jj.templateproject.networking.domain.result.BaseResult
 interface FishDataRepository {
 
     suspend fun fetchAllSpecies(): BaseResult<List<FishDataResponseItem>>
+
+    suspend fun fetchSpecifiedSpeciesInfo(name: String): BaseResult<List<FishDataResponseItem>>
 }
 
 class DefaultFishDataRepository(private val fishDataService: FishDataService) : FishDataRepository {
 
     override suspend fun fetchAllSpecies() = BaseResult(fishDataService.getAllSpeciesInfo())
+
+    override suspend fun fetchSpecifiedSpeciesInfo(name: String) = BaseResult(fishDataService.getSpecifiedSpeciesInfo(name))
 }
