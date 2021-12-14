@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.jj.templateproject.core.framework.presentation.fragments.BaseFragment
 import com.jj.templateproject.networking.R
 import com.jj.templateproject.networking.databinding.FragmentApiResultsBinding
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ApiResultsFragment: BaseFragment(R.layout.fragment_api_results) {
+class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
 
-    private val apiResultsViewModel: ApiResultsViewModel by viewModels()
+    private val apiResultsViewModel: ApiResultsViewModel by viewModel()
 
     private var fragmentApiResultsBinding: FragmentApiResultsBinding? = null
 
@@ -22,7 +22,18 @@ class ApiResultsFragment: BaseFragment(R.layout.fragment_api_results) {
             binding.root
         }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        apiResultsViewModel.fetchSpecies()
+    }
+
     override fun setupSubscriptions() {
-//        TODO("Not yet implemented")
+        apiResultsViewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
+            if (state.loadingSpecies) {
+                fragmentApiResultsBinding?.loadingStateLabel?.text = "Loading"
+            } else {
+                fragmentApiResultsBinding?.loadingStateLabel?.text = "Finished loading"
+            }
+        }
     }
 }
