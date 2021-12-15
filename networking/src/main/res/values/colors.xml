@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fish_section_header">#3F51B5</color>
+    <color name="fish_section_value">#4A4A4A</color>
+</resources>

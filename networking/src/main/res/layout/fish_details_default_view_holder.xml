@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/fishNameLabel"
+        style="@style/FishSectionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
         android:text="Fish name"
         app:layout_constraintBottom_toBottomOf="@+id/fishNameValue"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,11 +18,12 @@
 
     <TextView
         android:id="@+id/fishNameValue"
+        style="@style/FishSectionValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fishNameLabel"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,9 +31,10 @@
 
     <TextView
         android:id="@+id/fishBiologyLabel"
+        style="@style/FishSectionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
         android:text="Fish biology"
         app:layout_constraintBottom_toBottomOf="@+id/fishBiologyValue"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,11 +42,12 @@
 
     <TextView
         android:id="@+id/fishBiologyValue"
+        style="@style/FishSectionValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fishBiologyLabel"
@@ -52,9 +56,10 @@
 
     <TextView
         android:id="@+id/fishRegionLabel"
+        style="@style/FishSectionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
         android:text="Fisheries region"
         app:layout_constraintBottom_toBottomOf="@+id/fishRegionValue"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,11 +67,12 @@
 
     <TextView
         android:id="@+id/fishRegionValue"
+        style="@style/FishSectionValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fishRegionLabel"
         app:layout_constraintTop_toBottomOf="@+id/fishBiologyValue"
@@ -74,9 +80,10 @@
 
     <TextView
         android:id="@+id/fishSugarsTotalLabel"
+        style="@style/FishSectionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
         android:text="Sugars total"
         app:layout_constraintBottom_toBottomOf="@+id/fishSugarsTotalValue"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,11 +91,12 @@
 
     <TextView
         android:id="@+id/fishSugarsTotalValue"
+        style="@style/FishSectionValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fishSugarsTotalLabel"
         app:layout_constraintTop_toBottomOf="@+id/fishRegionValue"
@@ -96,9 +104,10 @@
 
     <TextView
         android:id="@+id/fishTasteLabel"
+        style="@style/FishSectionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
         android:text="Taste"
         app:layout_constraintBottom_toBottomOf="@+id/fishTasteValue"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,12 +115,13 @@
 
     <TextView
         android:id="@+id/fishTasteValue"
+        style="@style/FishSectionValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fishTasteLabel"

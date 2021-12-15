@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FishSectionHeader">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/fish_section_header</item>
+    </style>
+
+    <style name="FishSectionValue">
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/fish_section_value</item>
+    </style>
+</resources>
