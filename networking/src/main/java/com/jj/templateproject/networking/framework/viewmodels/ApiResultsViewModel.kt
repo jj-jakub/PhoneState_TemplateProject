@@ -30,7 +30,8 @@ class ApiResultsViewModel(private val fishDataRepository: FishDataRepository) : 
             // TODO Handle error by repo
             try {
                 val fishDataResponseItemList = fishDataRepository.fetchSpecifiedSpeciesInfo("red-snapper").result
-                fishResults = fishDataResponseItemList.map {
+                val fishDataResponseItemList2 = fishDataRepository.fetchSpecifiedSpeciesInfo("canary-rockfish").result
+                fishResults = (fishDataResponseItemList + fishDataResponseItemList2).map {
                     DefaultFishItemViewData(htmlToString(it.speciesName), htmlToString(it.biology), htmlToString(it.nOAAFisheriesRegion),
                             htmlToString(it.sugarsTotal), htmlToString(it.taste))
                 }

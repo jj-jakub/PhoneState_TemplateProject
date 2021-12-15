@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jj.templateproject.core.framework.presentation.fragments.BaseFragment
 import com.jj.templateproject.networking.R
@@ -33,10 +35,15 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
     }
 
     private fun setupRecycler() {
-        val fishDetailsListRecycler = fragmentApiResultsBinding.fishDetailsList
-        fishDetailsListRecycler.layoutManager = LinearLayoutManager(requireContext())
+        val recyclerDividerDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        AppCompatResources.getDrawable(requireContext(), R.drawable.fish_results_divider)?.let { recyclerDividerDecoration.setDrawable(it) }
         fishResultsListAdapter = FishResultsListAdapter()
-        fishDetailsListRecycler.adapter = fishResultsListAdapter
+
+        with(fragmentApiResultsBinding.fishDetailsList) {
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(recyclerDividerDecoration)
+            adapter = fishResultsListAdapter
+        }
     }
 
     override fun setupSubscriptions() {
