@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/fishNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Fish name"
+        app:layout_constraintBottom_toBottomOf="@+id/fishNameValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fishNameValue" />
+
+    <TextView
+        android:id="@+id/fishNameValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fishNameLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="fishNameValue" />
+
+    <TextView
+        android:id="@+id/fishBiologyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Fish biology"
+        app:layout_constraintBottom_toBottomOf="@+id/fishBiologyValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fishBiologyValue" />
+
+    <TextView
+        android:id="@+id/fishBiologyValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fishBiologyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/fishNameValue"
+        tools:text="fishBiologyValue" />
+
+    <TextView
+        android:id="@+id/fishRegionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Fisheries region"
+        app:layout_constraintBottom_toBottomOf="@+id/fishRegionValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fishRegionValue" />
+
+    <TextView
+        android:id="@+id/fishRegionValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fishRegionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/fishBiologyValue"
+        tools:text="fishRegionValue" />
+
+    <TextView
+        android:id="@+id/fishSugarsTotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Sugars total"
+        app:layout_constraintBottom_toBottomOf="@+id/fishSugarsTotalValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fishSugarsTotalValue" />
+
+    <TextView
+        android:id="@+id/fishSugarsTotalValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fishSugarsTotalLabel"
+        app:layout_constraintTop_toBottomOf="@+id/fishRegionValue"
+        tools:text="fishSugarsTotalValue" />
+
+    <TextView
+        android:id="@+id/fishTasteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Taste"
+        app:layout_constraintBottom_toBottomOf="@+id/fishTasteValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fishTasteValue" />
+
+    <TextView
+        android:id="@+id/fishTasteValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fishTasteLabel"
+        app:layout_constraintTop_toBottomOf="@+id/fishSugarsTotalValue"
+        tools:text="fishTasteValue" />
+</androidx.constraintlayout.widget.ConstraintLayout>
