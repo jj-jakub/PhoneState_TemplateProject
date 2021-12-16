@@ -1,5 +1,6 @@
 package com.jj.templateproject.core.di.koin
 
+import com.jj.templateproject.core.data.text.TextHelper
 import com.jj.templateproject.core.domain.airplanemode.AirplaneModeManager
 import com.jj.templateproject.core.domain.bluetooth.BluetoothStateManager
 import com.jj.templateproject.core.domain.device.DeviceStateManager
@@ -20,6 +21,7 @@ val coreModule = module {
 
     single { com.jj.templateproject.core.data.network.RetrofitFactory() }
     single<com.jj.templateproject.core.data.coroutines.ICoroutineScopeProvider> { com.jj.templateproject.core.data.coroutines.CoroutineScopeProvider() }
+    single { TextHelper() }
     single { NetworkStateListener() }
     single<NetworkManager> { AndroidNetworkManager(get(), get(), get()) }
 

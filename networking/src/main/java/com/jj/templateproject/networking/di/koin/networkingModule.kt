@@ -13,5 +13,5 @@ val networkingModule = module {
     single<FishDataService> { get<RetrofitFactory>().createService(API_URLS.BASE_API) }
     single<FishDataRepository> { DefaultFishDataRepository(get()) }
 
-    viewModel { ApiResultsViewModel(get()) }
+    viewModel { ApiResultsViewModel(get(), get()) }
 }

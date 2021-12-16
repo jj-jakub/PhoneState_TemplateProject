@@ -4,7 +4,7 @@ sealed class DataResult<out T> {
 
     private var hasBeenHandled = false
 
-    class Success<T>(private val data: T?) : DataResult<T>() {
+    class Success<out T>(private val data: T?) : DataResult<T>() {
         val dataValue: T?
             get() = data
     }
@@ -18,9 +18,9 @@ sealed class DataResult<out T> {
         is Error -> throw exception
     }
 
-    fun onSuccess(block: () -> Unit): DataResult<T> {
+    fun onSuccess(block: Success<T>.() -> Unit): DataResult<T> {
         if (this is Success && hasBeenHandled.not()) {
-            block.invoke()
+            block()
             hasBeenHandled = true
         }
         return this
