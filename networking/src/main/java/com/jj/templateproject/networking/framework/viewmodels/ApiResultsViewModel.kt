@@ -29,8 +29,8 @@ class ApiResultsViewModel(private val fishDataRepository: FishDataRepository) : 
             stateMutableLiveData.value = ViewState(true, listOf())
             // TODO Handle error by repo
             try {
-                val fishDataResponseItemList = fishDataRepository.fetchSpecifiedSpeciesInfo("red-snapper").result
-                val fishDataResponseItemList2 = fishDataRepository.fetchSpecifiedSpeciesInfo("canary-rockfish").result
+                val fishDataResponseItemList = fishDataRepository.fetchSpecifiedSpeciesInfo("red-snapper").forceGetValue()
+                val fishDataResponseItemList2 = fishDataRepository.fetchSpecifiedSpeciesInfo("canary-rockfish").forceGetValue()
                 fishResults = (fishDataResponseItemList + fishDataResponseItemList2).map {
                     DefaultFishItemViewData(htmlToString(it.speciesName), htmlToString(it.biology), htmlToString(it.nOAAFisheriesRegion),
                             htmlToString(it.sugarsTotal), htmlToString(it.taste))
