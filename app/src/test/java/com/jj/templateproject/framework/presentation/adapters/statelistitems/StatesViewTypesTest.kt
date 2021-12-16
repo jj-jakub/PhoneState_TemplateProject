@@ -1,6 +1,8 @@
 package com.jj.templateproject.framework.presentation.adapters.statelistitems
 
 import com.jj.templateproject.R
+import com.jj.templateproject.core.framework.presentation.adapters.statelistitems.StatesViewTypes
+import com.jj.templateproject.core.framework.presentation.adapters.statelistitems.color
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

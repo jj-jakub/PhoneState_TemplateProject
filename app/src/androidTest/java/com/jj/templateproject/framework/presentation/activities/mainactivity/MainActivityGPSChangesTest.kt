@@ -3,10 +3,9 @@ package com.jj.templateproject.framework.presentation.activities.mainactivity
 import android.graphics.Color
 import androidx.test.core.app.ActivityScenario
 import com.jj.templateproject.R
+import com.jj.templateproject.core.domain.gps.GPSManager
+import com.jj.templateproject.core.domain.gps.GPSState
 import com.jj.templateproject.di.koin.mainModule
-import com.jj.templateproject.domain.bluetooth.BluetoothState
-import com.jj.templateproject.domain.gps.GPSManager
-import com.jj.templateproject.domain.gps.GPSState
 import com.jj.templateproject.framework.presentation.activities.MainActivity
 import com.jj.templateproject.utils.DELAY_AFTER_CHANGE_EMIT
 import com.jj.templateproject.utils.assertBackgroundColorMatches
