@@ -56,6 +56,10 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
                 fragmentApiResultsBinding.loadingStateLabel.text = "Finished loading"
                 fishResultsListAdapter.setItems(state.fishItemsList)
             }
+
+            state.loadingError?.handle { errorMessage ->
+                fragmentApiResultsBinding.errorMessageValue.text = errorMessage
+            }
             fishResultsListAdapter.notifyDataSetChanged()
         }
     }
