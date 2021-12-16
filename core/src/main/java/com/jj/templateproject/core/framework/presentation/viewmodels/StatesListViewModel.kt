@@ -5,8 +5,15 @@ import com.jj.templateproject.core.framework.presentation.adapters.statelistitem
 import com.jj.templateproject.core.framework.presentation.adapters.statelistitems.StatesRowNetworkItemData
 import com.jj.templateproject.core.framework.presentation.adapters.statelistitems.StatesRowSecondViewItemData
 import com.jj.templateproject.core.framework.presentation.adapters.statelistitems.StatesRowThirdViewItemData
+import com.jj.templateproject.core.framework.presentation.viewmodels.StatesListViewModel.ViewAction
+import com.jj.templateproject.core.framework.presentation.viewmodels.StatesListViewModel.ViewState
+import com.jj.templateproject.core.framework.presentation.viewmodels.states.BaseViewState
 
-class StatesListViewModel : BaseViewModel() {
+class StatesListViewModel : BaseViewModel<ViewState, ViewAction>(ViewState()) {
+
+    data class ViewState(val isLoading: Boolean = false) : BaseViewState
+
+    sealed class ViewAction : BaseViewAction
 
     private val itemsProvider = ItemsProvider()
 

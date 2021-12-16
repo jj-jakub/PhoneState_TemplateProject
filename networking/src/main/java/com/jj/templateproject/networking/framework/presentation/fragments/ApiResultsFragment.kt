@@ -48,6 +48,7 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
 
     override fun setupSubscriptions() {
         apiResultsViewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
+            setLoadingPopupVisibility(isVisible = state.loadingSpecies)
             if (state.loadingSpecies) {
                 fragmentApiResultsBinding.loadingStateLabel.text = "Loading"
                 fishResultsListAdapter.setItems(listOf())

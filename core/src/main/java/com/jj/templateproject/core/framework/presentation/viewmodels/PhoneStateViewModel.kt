@@ -10,7 +10,10 @@ import com.jj.templateproject.core.domain.network.NetworkState
 import com.jj.templateproject.core.domain.network.NetworkState.Connected
 import com.jj.templateproject.core.domain.network.NetworkState.NotConnected
 import com.jj.templateproject.core.domain.network.NetworkState.Unknown
+import com.jj.templateproject.core.framework.presentation.viewmodels.PhoneStateViewModel.ViewAction
+import com.jj.templateproject.core.framework.presentation.viewmodels.PhoneStateViewModel.ViewState
 import com.jj.templateproject.core.framework.presentation.viewmodels.states.AirplaneModeViewState
+import com.jj.templateproject.core.framework.presentation.viewmodels.states.BaseViewState
 import com.jj.templateproject.core.framework.presentation.viewmodels.states.BluetoothViewState
 import com.jj.templateproject.core.framework.presentation.viewmodels.states.GPSViewState
 import com.jj.templateproject.core.framework.presentation.viewmodels.states.MainViewState
@@ -21,7 +24,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
 
-class PhoneStateViewModel : BaseViewModel() {
+class PhoneStateViewModel : BaseViewModel<ViewState, ViewAction>(ViewState()) {
+
+    data class ViewState(val isLoading: Boolean = false) : BaseViewState
+
+    sealed class ViewAction : BaseViewAction
 
     private val phoneStateViewStateFlow = MutableStateFlow(MainViewState())
 
@@ -37,10 +44,10 @@ class PhoneStateViewModel : BaseViewModel() {
 
     private fun onDeviceStateChanged(newDeviceState: DeviceState) {
         val newMainViewState = phoneStateViewStateFlow.value.copy(
-            networkViewState = createNetworkViewState(newDeviceState.networkState),
-            airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState),
-            bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState),
-            gpsViewState = createGPSViewState(newDeviceState.gpsState)
+                networkViewState = createNetworkViewState(newDeviceState.networkState),
+                airplaneModeViewState = createAirplaneViewState(newDeviceState.airplaneModeState),
+                bluetoothViewState = createBluetoothViewState(newDeviceState.bluetoothState),
+                gpsViewState = createGPSViewState(newDeviceState.gpsState)
         )
 
         changePhoneStateViewStateFlow(newMainViewState)
@@ -48,9 +55,9 @@ class PhoneStateViewModel : BaseViewModel() {
 
     private fun createNetworkViewState(networkState: NetworkState) = when (networkState) {
         is Connected -> NetworkViewState(
-            isKnown = true,
-            isActive = true,
-            type = networkState.type
+                isKnown = true,
+                isActive = true,
+                type = networkState.type
         )
         is NotConnected -> NetworkViewState(isKnown = true, isActive = false)
         is Unknown -> NetworkViewState(isKnown = false)
@@ -60,8 +67,8 @@ class PhoneStateViewModel : BaseViewModel() {
         when (airplaneModeState) {
             is AirplaneModeState.TurnedOn -> AirplaneModeViewState(isKnown = true, isActive = true)
             is AirplaneModeState.TurnedOff -> AirplaneModeViewState(
-                isKnown = true,
-                isActive = false
+                    isKnown = true,
+                    isActive = false
             )
             is AirplaneModeState.Unknown -> AirplaneModeViewState(isKnown = false)
         }
@@ -70,11 +77,11 @@ class PhoneStateViewModel : BaseViewModel() {
     private fun createBluetoothViewState(bluetoothState: BluetoothState) =
         when (bluetoothState) {
             is BluetoothState.TurnedOn -> BluetoothViewState(
-                isKnown = true, isActive = true, bluetoothState = bluetoothState
+                    isKnown = true, isActive = true, bluetoothState = bluetoothState
             )
             is BluetoothState.TurningOn, BluetoothState.TurningOff, BluetoothState.TurnedOff,
             BluetoothState.NotAvailable -> BluetoothViewState(
-                isKnown = true, isActive = false, bluetoothState = bluetoothState
+                    isKnown = true, isActive = false, bluetoothState = bluetoothState
             )
             else -> BluetoothViewState(isKnown = false, isActive = false)
         }

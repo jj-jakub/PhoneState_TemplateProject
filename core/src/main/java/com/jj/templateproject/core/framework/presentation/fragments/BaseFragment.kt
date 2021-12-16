@@ -11,5 +11,9 @@ abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
         setupSubscriptions()
     }
 
-    abstract fun setupSubscriptions()
+    protected abstract fun setupSubscriptions()
+
+    protected fun setLoadingPopupVisibility(isVisible: Boolean) {
+
+    }
 }
