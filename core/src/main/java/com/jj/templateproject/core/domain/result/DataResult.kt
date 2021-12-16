@@ -26,9 +26,9 @@ sealed class DataResult<out T> {
         return this
     }
 
-    fun onError(block: () -> Unit): DataResult<T> {
+    fun onError(block: Error.() -> Unit): DataResult<T> {
         if (this is Error && hasBeenHandled.not()) {
-            block.invoke()
+            block()
             hasBeenHandled = true
         }
         return this
