@@ -6,7 +6,7 @@ import com.jj.templateproject.core.framework.presentation.viewmodels.BaseViewMod
 import com.jj.templateproject.core.framework.presentation.viewmodels.ViewEvent
 import com.jj.templateproject.core.framework.presentation.viewmodels.event
 import com.jj.templateproject.core.framework.presentation.viewmodels.states.BaseViewState
-import com.jj.templateproject.networking.domain.usecases.GetFishResultsUseCase
+import com.jj.templateproject.networking.domain.usecases.FishResultsUseCases
 import com.jj.templateproject.networking.framework.presentation.adapters.fishlistitems.FishItemViewData
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewAction
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewAction.FetchingChanged
@@ -14,7 +14,7 @@ import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewMode
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewState
 import kotlinx.coroutines.launch
 
-class ApiResultsViewModel(private val getFishResultsUseCase: GetFishResultsUseCase) : BaseViewModel<ViewState, ViewAction>(ViewState()) {
+class ApiResultsViewModel(private val fishResultsUseCases: FishResultsUseCases) : BaseViewModel<ViewState, ViewAction>(ViewState()) {
 
     data class ViewState(
             val loadingSpecies: Boolean = false,
@@ -36,7 +36,7 @@ class ApiResultsViewModel(private val getFishResultsUseCase: GetFishResultsUseCa
     fun fetchSpecies() {
         viewModelScope.launch {
             sendViewAction(FetchingChanged(true))
-            getFishResultsUseCase().onSuccess {
+            fishResultsUseCases.getAllFishResultsUseCase().onSuccess {
                 sendViewAction(FetchingChanged(false, dataValue))
             }.onError {
                 sendViewAction(FetchingChanged(false, dataValue))
