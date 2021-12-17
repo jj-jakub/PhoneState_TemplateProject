@@ -50,17 +50,31 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
         apiResultsViewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             setLoadingPopupVisibility(isVisible = state.loadingSpecies)
             if (state.loadingSpecies) {
-                fragmentApiResultsBinding.loadingStateLabel.text = "Loading"
+                setNormalMessage("Loading")
                 fishResultsListAdapter.setItems(listOf())
             } else {
-                fragmentApiResultsBinding.loadingStateLabel.text = "Finished loading"
+                setNormalMessage("Finished loading")
                 fishResultsListAdapter.setItems(state.fishItemsList)
             }
 
             state.loadingError?.handle { errorMessage ->
-                fragmentApiResultsBinding.loadingStateLabel.text = errorMessage
+                setErrorMessage(errorMessage)
             }
             fishResultsListAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setErrorMessage(message: String) {
+        with(fragmentApiResultsBinding.loadingStateLabel) {
+            setTextAppearance(R.style.ErrorText)
+            text = message
+        }
+    }
+
+    private fun setNormalMessage(message: String) {
+        with(fragmentApiResultsBinding.loadingStateLabel) {
+            setTextAppearance(R.style.CasualText)
+            text = message
         }
     }
 }

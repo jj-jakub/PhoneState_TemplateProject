@@ -15,4 +15,19 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@color/fish_section_value</item>
     </style>
+
+    <style name="CasualText">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/casualTextColor</item>
+    </style>
+
+    <style name="ErrorText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
 </resources>
