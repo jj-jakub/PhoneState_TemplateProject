@@ -8,6 +8,7 @@ import com.jj.templateproject.di.koin.mainModule
 import com.jj.templateproject.framework.presentation.activities.MainActivity
 import com.jj.templateproject.utils.assertViewIsDisplayed
 import com.jj.templateproject.utils.assertViewTextMatches
+import com.jj.templateproject.utils.di.defaultKoinModules
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
@@ -21,7 +22,7 @@ class MainActivityTest {
         @BeforeClass
         @JvmStatic
         fun setup() {
-            loadKoinModules(mainModule)
+            loadKoinModules(defaultKoinModules)
         }
     }
 

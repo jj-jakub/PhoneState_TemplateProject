@@ -5,11 +5,10 @@ import androidx.test.core.app.ActivityScenario
 import com.jj.templateproject.R
 import com.jj.templateproject.core.domain.bluetooth.BluetoothState
 import com.jj.templateproject.core.domain.bluetooth.BluetoothStateManager
-import com.jj.templateproject.di.koin.mainModule
 import com.jj.templateproject.framework.presentation.activities.MainActivity
-import com.jj.templateproject.utils.DELAY_AFTER_CHANGE_EMIT
 import com.jj.templateproject.utils.assertBackgroundColorMatches
 import com.jj.templateproject.utils.assertViewTextMatches
+import com.jj.templateproject.utils.di.defaultKoinModules
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
@@ -53,7 +52,7 @@ class MainActivityBluetoothChangesTest : KoinTest {
         mockModule = module {
             single { bluetoothStateManager }
         }
-        loadKoinModules(listOf(mainModule, mockModule))
+        loadKoinModules(defaultKoinModules + mockModule)
     }
 
     private fun launchMainActivity() {
@@ -112,12 +111,11 @@ class MainActivityBluetoothChangesTest : KoinTest {
 
     private fun changeBluetoothStateFlow(bluetoothState: BluetoothState) {
         bluetoothStateFlow.value = bluetoothState
-        Thread.sleep(DELAY_AFTER_CHANGE_EMIT)
     }
 
     @After
     fun cleanup() {
-        unloadKoinModules(listOf(mainModule, mockModule))
+        unloadKoinModules(defaultKoinModules + mockModule)
         rule.close()
     }
 }
