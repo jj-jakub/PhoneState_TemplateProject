@@ -1,15 +1,12 @@
 package com.jj.templateproject.networking.framework.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.jj.templateproject.core.data.text.TextHelper
 import com.jj.templateproject.core.framework.presentation.viewmodels.BaseViewAction
 import com.jj.templateproject.core.framework.presentation.viewmodels.BaseViewModel
 import com.jj.templateproject.core.framework.presentation.viewmodels.ViewEvent
 import com.jj.templateproject.core.framework.presentation.viewmodels.event
 import com.jj.templateproject.core.framework.presentation.viewmodels.states.BaseViewState
-import com.jj.templateproject.networking.data.repositories.FishDataRepository
-import com.jj.templateproject.networking.domain.fishdata.FishDataResponseItem
-import com.jj.templateproject.networking.framework.presentation.adapters.fishlistitems.DefaultFishItemViewData
+import com.jj.templateproject.networking.domain.usecases.GetFishResultsUseCase
 import com.jj.templateproject.networking.framework.presentation.adapters.fishlistitems.FishItemViewData
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewAction
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewAction.FetchingChanged
@@ -17,8 +14,7 @@ import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewMode
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewState
 import kotlinx.coroutines.launch
 
-class ApiResultsViewModel(private val fishDataRepository: FishDataRepository,
-        private val textHelper: TextHelper) : BaseViewModel<ViewState, ViewAction>(ViewState()) {
+class ApiResultsViewModel(private val getFishResultsUseCase: GetFishResultsUseCase) : BaseViewModel<ViewState, ViewAction>(ViewState()) {
 
     data class ViewState(
             val loadingSpecies: Boolean = false,
@@ -40,34 +36,12 @@ class ApiResultsViewModel(private val fishDataRepository: FishDataRepository,
     fun fetchSpecies() {
         viewModelScope.launch {
             sendViewAction(FetchingChanged(true))
-            sendViewAction(FetchingChanged(false, getFishResults()))
+            getFishResultsUseCase().onSuccess {
+                sendViewAction(FetchingChanged(false, dataValue))
+            }.onError {
+                sendViewAction(FetchingChanged(false, dataValue))
+                sendViewAction(FetchingError(exception.localizedMessage?.let { "Error: $it" } ?: "Fetching error"))
+            }
         }
-    }
-
-    private suspend fun getFishResults(): List<FishItemViewData> {
-        val fishResults: ArrayList<FishDataResponseItem> = arrayListOf()
-        with(fishDataRepository) {
-            fetchSpecifiedSpeciesInfo("red-snapper")
-                .onSuccess {
-                    getValue()?.let { list -> fishResults.addAll(list) }
-                }.onError {
-                    onFetchingError(this.exception)
-                }
-            fetchSpecifiedSpeciesInfo("canary-rockfish")
-                .onSuccess {
-                    getValue()?.let { list -> fishResults.addAll(list) }
-                }.onError {
-                    onFetchingError(this.exception)
-                }
-        }
-        return fishResults.map {
-            DefaultFishItemViewData(textHelper.htmlToString(it.speciesName), textHelper.htmlToString(it.biology),
-                    textHelper.htmlToString(it.nOAAFisheriesRegion), textHelper.htmlToString(it.sugarsTotal),
-                    textHelper.htmlToString(it.taste))
-        }
-    }
-
-    private fun onFetchingError(e: Exception) {
-        sendViewAction(FetchingError(e.localizedMessage?.let { "Error: $it" } ?: "Fetching error"))
     }
 }
