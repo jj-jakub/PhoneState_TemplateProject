@@ -10,19 +10,16 @@ class GetAllFishResultsUseCase(private val fishDataRepository: FishDataRepositor
     GetFishResultsUseCase(textHelper) {
 
     suspend operator fun invoke(): UseCaseResult<List<FishItemViewData>> {
-        val fishResults: ArrayList<FishDataResponseItem> = arrayListOf()
+        val preparedFishResults: ArrayList<FishItemViewData> = arrayListOf()
 
-        try {
+        return try {
             fishDataRepository.fetchAllSpecies()
-                .onSuccess {
-                    getValue()?.let { list -> fishResults.addAll(list) }
-                }.onError {
-                    throw exception
-                }
-        } catch (e: Exception) {
-            return UseCaseResult.Error(prepareFishResults(fishResults), e)
-        }
+                .onSuccess { getValue()?.let { list -> preparedFishResults.addAll(prepareFishResults(list)) } }
+                .onError { throw exception }
 
-        return UseCaseResult.Success(prepareFishResults(fishResults))
+            UseCaseResult.Success(preparedFishResults)
+        } catch (e: Exception) {
+            UseCaseResult.Error(preparedFishResults, e)
+        }
     }
 }

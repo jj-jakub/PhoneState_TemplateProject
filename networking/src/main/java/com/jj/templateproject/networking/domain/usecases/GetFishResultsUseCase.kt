@@ -7,7 +7,7 @@ import com.jj.templateproject.networking.framework.presentation.adapters.fishlis
 
 abstract class GetFishResultsUseCase(private val textHelper: TextHelper) {
 
-    protected fun prepareFishResults(fishResults: ArrayList<FishDataResponseItem>): List<FishItemViewData> {
+    protected fun prepareFishResults(fishResults: List<FishDataResponseItem>): List<FishItemViewData> {
         return fishResults.map {
             val speciesCleanString = textHelper.htmlToString(it.speciesName)
             val biologyCleanString = textHelper.htmlToString(it.biology)
