@@ -14,6 +14,11 @@ sealed class UseCaseResult<out T> {
             get() = data
     }
 
+    fun getValue() = when (this) {
+        is Success -> dataValue
+        is Error -> dataValue
+    }
+
     fun onSuccess(block: Success<T>.() -> Unit): UseCaseResult<T> {
         if (this is Success && hasBeenHandled.not()) {
             block()
