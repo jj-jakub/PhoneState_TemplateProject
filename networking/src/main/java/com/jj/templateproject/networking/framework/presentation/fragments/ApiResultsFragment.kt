@@ -12,6 +12,7 @@ import com.jj.templateproject.networking.R
 import com.jj.templateproject.networking.databinding.FragmentApiResultsBinding
 import com.jj.templateproject.networking.framework.presentation.adapters.FishResultsListAdapter
 import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel
+import com.jj.templateproject.networking.framework.viewmodels.ApiResultsViewModel.ViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
@@ -49,19 +50,24 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
     override fun setupSubscriptions() {
         apiResultsViewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             setLoadingPopupVisibility(isVisible = state.loadingSpecies)
-            if (state.loadingSpecies) {
-                setNormalMessage("Loading")
-                fishResultsListAdapter.setItems(listOf())
-            } else {
-                setNormalMessage("Finished loading")
-                fishResultsListAdapter.setItems(state.fishItemsList)
-            }
+
+            handleSpeciesList(state)
 
             state.loadingError?.handle { errorMessage ->
                 setErrorMessage(errorMessage)
             }
-            fishResultsListAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun handleSpeciesList(state: ViewState) {
+        if (state.loadingSpecies) {
+            setNormalMessage("Loading")
+            fishResultsListAdapter.setItems(listOf())
+        } else {
+            setNormalMessage("Finished loading")
+            fishResultsListAdapter.setItems(state.fishItemsList)
+        }
+        fishResultsListAdapter.notifyDataSetChanged()
     }
 
     private fun setErrorMessage(message: String) {
