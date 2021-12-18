@@ -29,7 +29,8 @@ class ApiResultsViewModel(private val fishResultsUseCases: FishResultsUseCases) 
 
     override fun reduceState(viewAction: ViewAction): ViewState =
         when (viewAction) {
-            is FetchingChanged -> state.copy(loadingSpecies = viewAction.isLoading, fishItemsList = viewAction.fishResults)
+            is FetchingChanged -> state.copy(loadingSpecies = viewAction.isLoading, fishItemsList = viewAction.fishResults,
+                    loadingError = null)
             is FetchingError -> state.copy(loadingError = viewAction.errorMessage.event())
         }
 
