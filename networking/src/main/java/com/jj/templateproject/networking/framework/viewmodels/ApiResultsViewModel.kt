@@ -36,7 +36,7 @@ class ApiResultsViewModel(private val fishResultsUseCases: FishResultsUseCases) 
     fun fetchSpecies() {
         viewModelScope.launch {
             sendViewAction(FetchingChanged(true))
-            fishResultsUseCases.getAllFishResultsUseCase().onSuccess {
+            fishResultsUseCases.getTwoFishResultsUseCase().onSuccess {
                 sendViewAction(FetchingChanged(false, dataValue))
             }.onError {
                 sendViewAction(FetchingChanged(false, dataValue))

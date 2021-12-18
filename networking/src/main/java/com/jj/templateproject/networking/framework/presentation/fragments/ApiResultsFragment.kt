@@ -31,8 +31,18 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecycler()
+        setupRefreshSwipe()
         super.onViewCreated(view, savedInstanceState)
         apiResultsViewModel.fetchSpecies()
+    }
+
+    private fun setupRefreshSwipe() {
+        with(fragmentApiResultsBinding.fishDetailsListParent) {
+            setOnRefreshListener {
+                apiResultsViewModel.fetchSpecies()
+            }
+            setColorSchemeResources(R.color.fish_section_header, R.color.yellow)
+        }
     }
 
     private fun setupRecycler() {
@@ -50,6 +60,7 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
     override fun setupSubscriptions() {
         apiResultsViewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             setLoadingPopupVisibility(isVisible = state.loadingSpecies)
+            fragmentApiResultsBinding.fishDetailsListParent.isRefreshing = state.loadingSpecies
 
             handleSpeciesList(state)
 
