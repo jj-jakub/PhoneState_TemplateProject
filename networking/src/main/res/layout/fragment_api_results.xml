@@ -13,11 +13,41 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/fishDetailsListParent"
+        app:layout_constraintBottom_toTopOf="@id/searchLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Loading label" />
+
+    <TextView
+        android:id="@+id/searchLabel"
+        style="@style/CasualText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/search_by_name"
+        app:layout_constraintBottom_toTopOf="@id/searchField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loadingStateLabel" />
+
+    <EditText
+        android:id="@+id/searchField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints="name"
+        android:hint="@string/name"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/fishDetailsListParent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fishDetailsListParent"
@@ -26,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loadingStateLabel">
+        app:layout_constraintTop_toBottomOf="@id/searchField">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fishDetailsList"
