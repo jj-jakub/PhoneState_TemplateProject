@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 
 class ApiResultsViewModel(private val fishResultsUseCases: FishResultsUseCases) : BaseViewModel<ViewState, ViewAction>(ViewState()) {
 
+    private var fishItemsListCache: List<FishItemViewData> = listOf()
+
     data class ViewState(
             val loadingSpecies: Boolean = false,
             val fishItemsList: List<FishItemViewData> = listOf(),
@@ -39,10 +41,18 @@ class ApiResultsViewModel(private val fishResultsUseCases: FishResultsUseCases) 
             sendViewAction(FetchingChanged(true))
             fishResultsUseCases.getTwoFishResultsUseCase().onSuccess {
                 sendViewAction(FetchingChanged(false, dataValue))
+                fishItemsListCache = dataValue
             }.onError {
                 sendViewAction(FetchingChanged(false, dataValue))
+                fishItemsListCache = dataValue
                 sendViewAction(FetchingError(exception.localizedMessage?.let { "Error: $it" } ?: "Fetching error"))
             }
+        }
+    }
+
+    fun filterSpeciesByName(fishName: String) {
+        fishResultsUseCases.filterSpeciesByNameUseCase.invoke(fishName, fishItemsListCache).onSuccess {
+            sendViewAction(FetchingChanged(false, dataValue))
         }
     }
 }

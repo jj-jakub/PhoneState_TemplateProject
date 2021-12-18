@@ -1,11 +1,11 @@
 package com.jj.templateproject.networking.framework.presentation.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,12 +40,20 @@ class ApiResultsFragment : BaseFragment(R.layout.fragment_api_results) {
     }
 
     private fun setupSearchField() {
-        fragmentApiResultsBinding.searchField.setOnEditorActionListener { view, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                Toast.makeText(requireContext(), "Searching for ${view.text}", Toast.LENGTH_SHORT).show()
+        fragmentApiResultsBinding.searchField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                /* no-op */
             }
-            true
-        }
+
+            override fun afterTextChanged(s: Editable?) {
+                /* no-op */
+            }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                apiResultsViewModel.filterSpeciesByName(text.toString())
+                /* no-op */
+            }
+        })
     }
 
     private fun setupRefreshSwipe() {
