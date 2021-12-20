@@ -17,5 +17,9 @@
         android:id="@+id/apiResultsFragment"
         android:name="com.jj.templateproject.networking.framework.presentation.fragments.ApiResultsFragment"
         android:label="ApiResultsFragment" />
+    <fragment
+        android:id="@+id/serverStatusFragment"
+        android:name="com.jj.templateproject.monitoring.framework.presentation.fragments.ServerStatusFragment"
+        android:label="ServerStatusFragment" />
 
 </navigation>

@@ -15,4 +15,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="API results" />
+    <item
+        android:id="@+id/serverStatusFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Server status" />
 </menu>
