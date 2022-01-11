@@ -9,12 +9,18 @@ sealed class DataResult<out T> {
             get() = data
     }
 
+    class Loading<out T>(private val data: T? = null) : DataResult<T>() {
+        val dataValue: T?
+            get() = data
+    }
+
     class Error(val exception: Exception) : DataResult<Nothing>()
 
     fun getValue(): T? = if (this is Success) dataValue else null
 
     fun forceGetValue(): T = when (this) {
         is Success -> dataValue!!
+        is Loading -> dataValue!!
         is Error -> throw exception
     }
 
