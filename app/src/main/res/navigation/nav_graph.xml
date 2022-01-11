@@ -2,13 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/phoneStateFragment">
+    app:startDestination="@+id/dictionaryFragment">
 
     <fragment
         android:id="@+id/phoneStateFragment"
         android:name="com.jj.templateproject.core.framework.presentation.fragments.PhoneStateFragment"
         android:label="PhoneStateFragment" />
-
     <fragment
         android:id="@+id/statesListFragment"
         android:name="com.jj.templateproject.core.framework.presentation.fragments.StatesListFragment"
@@ -21,5 +20,9 @@
         android:id="@+id/serverStatusFragment"
         android:name="com.jj.templateproject.monitoring.framework.presentation.fragments.ServerStatusFragment"
         android:label="ServerStatusFragment" />
+    <fragment
+        android:id="@+id/dictionaryFragment"
+        android:name="com.jj.templateproject.dictionary.framework.presentation.fragments.DictionaryFragment"
+        android:label="DictionaryFragment" />
 
 </navigation>
