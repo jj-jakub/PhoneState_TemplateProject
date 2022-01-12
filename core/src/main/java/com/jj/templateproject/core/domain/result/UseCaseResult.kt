@@ -9,6 +9,11 @@ sealed class UseCaseResult<out T> {
             get() = data
     }
 
+    class Loading<out T>(private val data: T? = null) : UseCaseResult<T>() {
+        val dataValue: T?
+            get() = data
+    }
+
     class Error<out T>(private val data: T, val exception: Exception) : UseCaseResult<T>() {
         val dataValue: T
             get() = data
@@ -17,6 +22,7 @@ sealed class UseCaseResult<out T> {
     fun getValue() = when (this) {
         is Success -> dataValue
         is Error -> dataValue
+        is Loading -> dataValue
     }
 
     fun onSuccess(block: Success<T>.() -> Unit): UseCaseResult<T> {
