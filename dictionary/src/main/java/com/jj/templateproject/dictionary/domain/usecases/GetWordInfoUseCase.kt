@@ -20,8 +20,9 @@ class GetWordInfoUseCase(private val wordInfoRepository: WordInfoRepository) {
         return wordInfoRepository.getWordInfo(word).map {
             val value = it.getValue() ?: emptyList()
             when (it) {
-                is Success, is Loading -> UseCaseResult.Success(value)
+                is Success -> UseCaseResult.Success(value)
                 is Error -> UseCaseResult.Error(value, it.exception)
+                is Loading -> UseCaseResult.Loading(value)
             }
         }
     }
