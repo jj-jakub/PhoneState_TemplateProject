@@ -6,6 +6,7 @@ import com.jj.templateproject.core.data.network.RetrofitFactory
 import com.jj.templateproject.dictionary.data.local.WordInfoDatabase
 import com.jj.templateproject.dictionary.data.remote.API_CONST
 import com.jj.templateproject.dictionary.data.repositories.DefaultWordInfoRepository
+import com.jj.templateproject.dictionary.data.util.Converters
 import com.jj.templateproject.dictionary.data.util.GsonParser
 import com.jj.templateproject.dictionary.domain.repositories.WordInfoRepository
 import com.jj.templateproject.dictionary.domain.usecases.GetWordInfoUseCase
@@ -16,7 +17,8 @@ import org.koin.dsl.module
 
 val dictionaryModule = module {
     single {
-        Room.databaseBuilder(androidContext(), WordInfoDatabase::class.java, "word_database").addTypeConverter(GsonParser(Gson())).build()
+        Room.databaseBuilder(androidContext(), WordInfoDatabase::class.java, "word_database").addTypeConverter(
+                Converters(GsonParser(Gson()))).build()
     }
     single<WordInfoRepository> {
         DefaultWordInfoRepository(get<RetrofitFactory>().createService(API_CONST.WORD_BASE_URL), get<WordInfoDatabase>().dao)
