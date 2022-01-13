@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/wordVerticalGuideline"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <TextView
+        android:id="@+id/wordLabel"
+        style="@style/WordSectionHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:text="Word"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/wordVerticalGuideline"
+        app:layout_constraintBottom_toBottomOf="@+id/wordValue"
+        app:layout_constraintTop_toTopOf="@+id/wordValue" />
+
+    <TextView
+        android:id="@+id/wordValue"
+        style="@style/WordSectionValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wordLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="wordValue" />
+
+    <TextView
+        android:id="@+id/wordPhoneticLabel"
+        style="@style/WordSectionHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:text="Phonetic"
+        app:layout_constraintBottom_toBottomOf="@+id/wordPhoneticValue"
+        app:layout_constraintEnd_toStartOf="@id/wordVerticalGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wordPhoneticValue" />
+
+    <TextView
+        android:id="@+id/wordPhoneticValue"
+        style="@style/WordSectionValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wordPhoneticLabel"
+        app:layout_constraintTop_toBottomOf="@+id/wordValue"
+        tools:text="wordPhoneticValue" />
+
+    <TextView
+        android:id="@+id/wordOriginLabel"
+        style="@style/WordSectionHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:text="Origin"
+        app:layout_constraintBottom_toBottomOf="@+id/wordOriginValue"
+        app:layout_constraintEnd_toStartOf="@id/wordVerticalGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wordOriginValue" />
+
+    <TextView
+        android:id="@+id/wordOriginValue"
+        style="@style/WordSectionValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wordOriginLabel"
+        app:layout_constraintTop_toBottomOf="@+id/wordPhoneticValue"
+        tools:text="wordOriginValue" />
+
+    <TextView
+        android:id="@+id/wordMeaningLabel"
+        style="@style/WordSectionHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:text="Meaning"
+        app:layout_constraintEnd_toStartOf="@id/wordVerticalGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/wordMeaningValue"
+        app:layout_constraintTop_toTopOf="@+id/wordMeaningValue" />
+
+    <TextView
+        android:id="@+id/wordMeaningValue"
+        style="@style/WordSectionValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wordMeaningLabel"
+        app:layout_constraintTop_toBottomOf="@id/wordOriginValue"
+        tools:text="wordMeaningValue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

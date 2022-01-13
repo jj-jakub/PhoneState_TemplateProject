@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="word_section_header">#00A807</color>
+    <color name="word_section_value">#4A4A4A</color>
+</resources>
