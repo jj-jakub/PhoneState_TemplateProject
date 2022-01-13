@@ -24,7 +24,7 @@ try {
 def ciBuildNumber = properties['ciBuildNumber']
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
