@@ -24,5 +24,9 @@
         android:id="@+id/dictionaryFragment"
         android:name="com.jj.templateproject.dictionary.framework.presentation.fragments.DictionaryFragment"
         android:label="DictionaryFragment" />
+    <activity
+        android:id="@+id/qrScannerActivity"
+        android:name="com.jj.templateproject.qrscanner.framework.presentation.QrScannerActivity"
+        android:label="QrScannerActivity" />
 
 </navigation>

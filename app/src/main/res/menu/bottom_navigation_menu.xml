@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/qrScannerActivity"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="QrScanner" />
     <item
         android:id="@+id/dictionaryFragment"
         android:enabled="true"
@@ -20,9 +26,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="API results" />
-    <item
-        android:id="@+id/serverStatusFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Server status" />
+<!--    <item-->
+<!--        android:id="@+id/serverStatusFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_launcher_foreground"-->
+<!--        android:title="Server status" />-->
 </menu>
