@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/notesMainFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Notes" />
+    <item
         android:id="@+id/qrScannerFragment"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
@@ -16,19 +21,19 @@
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="First fragment" />
-    <item
-        android:id="@+id/statesListFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Second fragment" />
+    <!--    <item-->
+    <!--        android:id="@+id/statesListFragment"-->
+    <!--        android:enabled="true"-->
+    <!--        android:icon="@drawable/ic_launcher_foreground"-->
+    <!--        android:title="Second fragment" />-->
     <item
         android:id="@+id/apiResultsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="API results" />
-<!--    <item-->
-<!--        android:id="@+id/serverStatusFragment"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_launcher_foreground"-->
-<!--        android:title="Server status" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/serverStatusFragment"-->
+    <!--        android:enabled="true"-->
+    <!--        android:icon="@drawable/ic_launcher_foreground"-->
+    <!--        android:title="Server status" />-->
 </menu>

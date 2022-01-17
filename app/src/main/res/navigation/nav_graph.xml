@@ -28,5 +28,9 @@
         android:id="@+id/qrScannerFragment"
         android:name="com.jj.templateproject.qrscanner.framework.presentation.QrScannerFragment"
         android:label="QrScannerFragment" />
+    <fragment
+        android:id="@+id/notesMainFragment"
+        android:name="com.jj.templateproject.notes.framework.presentation.fragments.NotesMainFragment"
+        android:label="NotesMainFragment" />
 
 </navigation>
