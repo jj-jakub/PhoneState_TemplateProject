@@ -19,9 +19,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph"/>
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:labelVisibilityMode="labeled"
+        app:itemIconSize="15dp"
+        app:layout_constraintBottom_toTopOf="@id/secondBottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/secondBottomNavigation"
         android:layout_width="0dp"
         android:layout_height="50dp"
         app:labelVisibilityMode="labeled"
@@ -29,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@id/mainLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/second_bottom_navigation_menu" />
 
     <TextView
         android:id="@+id/mainLabel"
