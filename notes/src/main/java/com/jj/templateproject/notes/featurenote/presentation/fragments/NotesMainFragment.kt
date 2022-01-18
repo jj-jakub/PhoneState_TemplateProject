@@ -1,15 +1,14 @@
-package com.jj.templateproject.notes.framework.presentation.fragments
+package com.jj.templateproject.notes.featurenote.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.jj.templateproject.core.databinding.FragmentPhoneStateBinding
 import com.jj.templateproject.core.framework.presentation.fragments.BaseFragment
 import com.jj.templateproject.notes.R
 import com.jj.templateproject.notes.databinding.FragmentNotesMainBinding
-import com.jj.templateproject.notes.framework.presentation.fragments.viewmodels.NotesMainViewModel
+import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel
 
 class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
 

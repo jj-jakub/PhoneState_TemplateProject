@@ -30,7 +30,7 @@
         android:label="QrScannerFragment" />
     <fragment
         android:id="@+id/notesMainFragment"
-        android:name="com.jj.templateproject.notes.framework.presentation.fragments.NotesMainFragment"
+        android:name="com.jj.templateproject.notes.featurenote.presentation.fragments.NotesMainFragment"
         android:label="NotesMainFragment" />
 
 </navigation>
