@@ -49,7 +49,7 @@ class NotesMainViewModel(private val noteUseCases: NoteUseCases) : BaseViewModel
 
     override fun reduceState(viewAction: ViewAction): ViewState =
         when (viewAction) {
-            is ViewAction.OrderChanged -> state.copy(noteOrder = viewAction.noteOrder)
+            is OrderChanged -> state.copy(noteOrder = viewAction.noteOrder)
             is NotesLoaded -> state.copy(isLoading = false, notes = viewAction.notes)
             is OrderSectionVisibilityChanged -> state.copy(isOrderSectionVisible = viewAction.isVisible)
             is NotesLoading -> state.copy(isLoading = true, notes = viewAction.notes)
