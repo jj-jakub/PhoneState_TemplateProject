@@ -10,7 +10,6 @@ import com.jj.templateproject.notes.R
 import com.jj.templateproject.notes.databinding.FragmentNotesMainBinding
 import com.jj.templateproject.notes.featurenote.presentation.adapters.NoteAdapter
 import com.jj.templateproject.notes.featurenote.presentation.utils.NoteMainViewEvent
-import com.jj.templateproject.notes.featurenote.presentation.utils.NoteViewData
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,7 +42,7 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
     private fun setupRecycler() {
         val stateListRecycler = fragmentNotesMainBinding.notesRecycler
         stateListRecycler.layoutManager = LinearLayoutManager(requireContext())
-        adapter = NoteAdapter()
+        adapter = NoteAdapter { notesMainViewModel.onEvent(NoteMainViewEvent.DeleteNote(it)) }
         stateListRecycler.adapter = adapter
     }
 
@@ -52,7 +51,7 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
             setLoadingPopupVisibility(state.isLoading)
 
             fragmentNotesMainBinding.orderSelectionSection.setNoteOrder(state.noteOrder)
-            adapter.setItems(state.notes.map { NoteViewData(title = it.title, content = it.content, color = it.color) })
+            adapter.setItems(state.notes)
             adapter.notifyDataSetChanged()
         }
     }
