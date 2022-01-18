@@ -24,13 +24,22 @@ class OrderSelectionSection @JvmOverloads constructor(
         setRadioButtonsOnClickListeners()
     }
 
+    fun setOnOrderChangeListener(onOrderChange: (NoteOrder) -> Unit) {
+        this.onOrderChange = onOrderChange
+    }
+
+    fun setNoteOrder(noteOrder: NoteOrder) {
+        this.noteOrder = noteOrder
+        refreshRadioButtonsState()
+    }
+
     private fun refreshRadioButtonsState() {
         with(binding) {
-            dateOrderRadioButton.isSelected = noteOrder is NoteOrder.Date
-            titleOrderRadioButton.isSelected = noteOrder is NoteOrder.Title
-            colorOrderRadioButton.isSelected = noteOrder is NoteOrder.Color
-            ascendingOrderRadioButton.isSelected = noteOrder.orderType is OrderType.Ascending
-            descendingOrderRadioButton.isSelected = noteOrder.orderType is OrderType.Descending
+            dateOrderRadioButton.isChecked = noteOrder is NoteOrder.Date
+            titleOrderRadioButton.isChecked = noteOrder is NoteOrder.Title
+            colorOrderRadioButton.isChecked = noteOrder is NoteOrder.Color
+            ascendingOrderRadioButton.isChecked = noteOrder.orderType is OrderType.Ascending
+            descendingOrderRadioButton.isChecked = noteOrder.orderType is OrderType.Descending
         }
     }
 
