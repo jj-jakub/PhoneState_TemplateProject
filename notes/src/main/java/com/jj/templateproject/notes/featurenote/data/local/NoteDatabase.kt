@@ -11,4 +11,8 @@ import com.jj.templateproject.notes.featurenote.domain.model.Note
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract val noteDao: NoteDao
+
+    companion object {
+        const val NOTE_ROOM_DB_NAME = "NOTE_ROOM_DB_NAME"
+    }
 }
