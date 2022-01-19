@@ -10,7 +10,7 @@ class NoteViewHolder(private val binding: LayoutNoteItemBinding) : RecyclerView.
         with(binding) {
             noteTitle.text = noteViewData.title
             noteContent.text = noteViewData.content
-            noteContainer.setBackgroundColor(noteViewData.color)
+            noteInnerContainer.setBackgroundColor(noteViewData.color)
             deleteNoteButton.setOnClickListener { onDeleteButtonClick() }
         }
     }
