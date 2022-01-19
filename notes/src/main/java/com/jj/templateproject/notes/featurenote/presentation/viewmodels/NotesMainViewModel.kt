@@ -13,6 +13,8 @@ import com.jj.templateproject.notes.featurenote.presentation.utils.NoteMainViewE
 import com.jj.templateproject.notes.featurenote.presentation.utils.NoteMainViewEvent.RestoreNote
 import com.jj.templateproject.notes.featurenote.presentation.utils.NoteMainViewEvent.ToggleOrderSection
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel.ViewAction
+import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel.ViewAction.NoteDeleted
+import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel.ViewAction.NoteRestored
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel.ViewAction.NotesLoaded
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel.ViewAction.NotesLoading
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel.ViewAction.OrderChanged
@@ -29,7 +31,8 @@ class NotesMainViewModel(private val noteUseCases: NoteUseCases) : BaseViewModel
             val isLoading: Boolean = false,
             val notes: List<Note> = emptyList(),
             val noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending),
-            val isOrderSectionVisible: Boolean = false
+            val isOrderSectionVisible: Boolean = false,
+            val undoDeleteNotePossible: Boolean = false
     ) : BaseViewState
 
     sealed class ViewAction : BaseViewAction {
@@ -37,6 +40,8 @@ class NotesMainViewModel(private val noteUseCases: NoteUseCases) : BaseViewModel
         class OrderSectionVisibilityChanged(val isVisible: Boolean) : ViewAction()
         class NotesLoaded(val notes: List<Note>) : ViewAction()
         class NotesLoading(val notes: List<Note> = emptyList()) : ViewAction()
+        object NoteDeleted : ViewAction()
+        object NoteRestored: ViewAction()
     }
 
     private var recentlyDeletedNote: Note? = null
@@ -53,6 +58,8 @@ class NotesMainViewModel(private val noteUseCases: NoteUseCases) : BaseViewModel
             is NotesLoaded -> state.copy(isLoading = false, notes = viewAction.notes)
             is OrderSectionVisibilityChanged -> state.copy(isOrderSectionVisible = viewAction.isVisible)
             is NotesLoading -> state.copy(isLoading = true, notes = viewAction.notes)
+            NoteDeleted -> state.copy(undoDeleteNotePossible = true)
+            NoteRestored -> state.copy(undoDeleteNotePossible = false)
         }
 
     fun onEvent(event: NoteMainViewEvent) {
@@ -73,6 +80,7 @@ class NotesMainViewModel(private val noteUseCases: NoteUseCases) : BaseViewModel
         viewModelScope.launch {
             noteUseCases.deleteNoteUseCase(note)
             recentlyDeletedNote = note
+            sendViewAction(NoteDeleted)
         }
     }
 
@@ -81,6 +89,7 @@ class NotesMainViewModel(private val noteUseCases: NoteUseCases) : BaseViewModel
             viewModelScope.launch {
                 noteUseCases.addNoteUseCase(noteToRestore)
                 recentlyDeletedNote = null
+                sendViewAction(NoteRestored)
             }
         }
     }

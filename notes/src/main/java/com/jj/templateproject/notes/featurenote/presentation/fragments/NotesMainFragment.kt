@@ -31,6 +31,9 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
         setupOrderSelectionSection()
+        fragmentNotesMainBinding.undoDeleteButton.setOnClickListener {
+            notesMainViewModel.onEvent(NoteMainViewEvent.RestoreNote)
+        }
     }
 
     private fun setupOrderSelectionSection() {
@@ -50,6 +53,7 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
         notesMainViewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             setLoadingPopupVisibility(state.isLoading)
 
+            fragmentNotesMainBinding.undoDeleteButton.isEnabled = state.undoDeleteNotePossible
             fragmentNotesMainBinding.orderSelectionSection.setNoteOrder(state.noteOrder)
             adapter.setItems(state.notes)
             adapter.notifyDataSetChanged()
