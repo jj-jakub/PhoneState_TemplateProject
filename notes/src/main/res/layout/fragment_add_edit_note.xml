@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addEditNoteLayoutContainer"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@color/purple_700"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/firstColorButton"
+        style="@style/ColorPickerButton"
+        app:layout_constraintEnd_toStartOf="@+id/secondColorButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/secondColorButton"
+        style="@style/ColorPickerButton"
+        app:layout_constraintEnd_toStartOf="@+id/thirdColorButton"
+        app:layout_constraintStart_toEndOf="@+id/firstColorButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/thirdColorButton"
+        style="@style/ColorPickerButton"
+        app:layout_constraintEnd_toStartOf="@+id/fourthColorButton"
+        app:layout_constraintStart_toEndOf="@+id/secondColorButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/fourthColorButton"
+        style="@style/ColorPickerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/thirdColorButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/fifthColorButton"
+        style="@style/ColorPickerButton"
+        app:layout_constraintEnd_toStartOf="@+id/sixthColorButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstColorButton" />
+
+    <Button
+        android:id="@+id/sixthColorButton"
+        style="@style/ColorPickerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fifthColorButton"
+        app:layout_constraintTop_toBottomOf="@+id/fourthColorButton" />
+
+    <EditText
+        android:id="@+id/noteTitleInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fifthColorButton" />
+
+    <EditText
+        android:id="@+id/noteContentInput"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/saveNoteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteTitleInput" />
+
+    <Button
+        android:id="@+id/saveNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/save_note"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

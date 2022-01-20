@@ -33,8 +33,6 @@ class AddEditNoteViewModel(private val useCases: NoteUseCases) : BaseViewModel<V
     data class ViewState(
             val isLoading: Boolean = false,
             val currentlySelectedColor: Int = Note.noteColors.random(),
-            val noteTitle: String = "",
-            val noteContent: String = "",
             val noteTitleState: AddEditNoteTextFieldState = AddEditNoteTextFieldState(hint = "Enter title"),
             val noteContentState: AddEditNoteTextFieldState = AddEditNoteTextFieldState(hint = "Enter content"),
     ) : BaseViewState
@@ -79,8 +77,8 @@ class AddEditNoteViewModel(private val useCases: NoteUseCases) : BaseViewModel<V
             try {
                 useCases.addNoteUseCase(
                         Note(
-                                title = state.noteTitle,
-                                content = state.noteContent,
+                                title = state.noteTitleState.content,
+                                content = state.noteContentState.content,
                                 timestamp = Date().time,
                                 color = state.currentlySelectedColor,
                                 id = currentNoteId
