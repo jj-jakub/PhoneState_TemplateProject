@@ -7,49 +7,49 @@
     android:layout_height="match_parent"
     tools:background="@color/purple_700">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.jj.templateproject.core.framework.presentation.views.BaseButton
         android:id="@+id/firstColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/secondColorButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.jj.templateproject.core.framework.presentation.views.BaseButton
         android:id="@+id/secondColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/thirdColorButton"
         app:layout_constraintStart_toEndOf="@+id/firstColorButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.jj.templateproject.core.framework.presentation.views.BaseButton
         android:id="@+id/thirdColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/fourthColorButton"
         app:layout_constraintStart_toEndOf="@+id/secondColorButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.jj.templateproject.core.framework.presentation.views.BaseButton
         android:id="@+id/fourthColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/thirdColorButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.jj.templateproject.core.framework.presentation.views.BaseButton
         android:id="@+id/fifthColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/sixthColorButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstColorButton" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.jj.templateproject.core.framework.presentation.views.BaseButton
         android:id="@+id/sixthColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fifthColorButton"
         app:layout_constraintTop_toBottomOf="@+id/fourthColorButton" />
 
-    <EditText
+    <com.jj.templateproject.core.framework.presentation.views.BaseEditText
         android:id="@+id/noteTitleInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,12 +57,11 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fifthColorButton" />
 
-    <EditText
+    <com.jj.templateproject.core.framework.presentation.views.BaseEditText
         android:id="@+id/noteContentInput"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -72,7 +71,6 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:gravity="top"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/saveNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

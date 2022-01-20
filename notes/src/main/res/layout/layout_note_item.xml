@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         tools:background="@color/red">
 
-        <TextView
+        <com.jj.templateproject.core.framework.presentation.views.BaseTextView
             android:id="@+id/noteTitle"
             style="@style/NoteContentStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="NoteTitle" />
 
-        <TextView
+        <com.jj.templateproject.core.framework.presentation.views.BaseTextView
             android:id="@+id/noteContent"
             style="@style/NoteContentStyle"
             app:layout_constraintBottom_toBottomOf="parent"
