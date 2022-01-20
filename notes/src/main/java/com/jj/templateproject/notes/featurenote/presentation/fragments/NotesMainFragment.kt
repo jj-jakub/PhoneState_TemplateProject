@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jj.templateproject.core.framework.presentation.fragments.BaseFragment
 import com.jj.templateproject.notes.R
 import com.jj.templateproject.notes.databinding.FragmentNotesMainBinding
+import com.jj.templateproject.notes.featureaddeditnote.presentation.fragments.NOTE_TO_EDIT_ID
 import com.jj.templateproject.notes.featurenote.presentation.adapters.NoteAdapter
 import com.jj.templateproject.notes.featurenote.presentation.utils.NoteMainViewEvent
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel
@@ -40,7 +42,7 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
             notesMainViewModel.onEvent(NoteMainViewEvent.RestoreNote)
         }
         fragmentNotesMainBinding.createNoteButton.setOnClickListener {
-            findNavController().navigate(noteNavigation.addEditNoteDestinationId())
+            openAddEditNoteScreen()
         }
     }
 
@@ -53,8 +55,16 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
     private fun setupRecycler() {
         val stateListRecycler = fragmentNotesMainBinding.notesRecycler
         stateListRecycler.layoutManager = LinearLayoutManager(requireContext())
-        adapter = NoteAdapter { notesMainViewModel.onEvent(NoteMainViewEvent.DeleteNote(it)) }
+        adapter = NoteAdapter(
+                onItemClickListener = { openAddEditNoteScreen(it.id) },
+                onDeleteClickListener = { notesMainViewModel.onEvent(NoteMainViewEvent.DeleteNote(it)) }
+        )
         stateListRecycler.adapter = adapter
+    }
+
+    private fun openAddEditNoteScreen(noteId: Int? = null) {
+        val bundle = bundleOf(NOTE_TO_EDIT_ID to noteId)
+        findNavController().navigate(noteNavigation.addEditNoteDestinationId(), bundle)
     }
 
     override fun setupSubscriptions() {

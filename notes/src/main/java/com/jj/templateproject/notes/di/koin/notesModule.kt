@@ -8,6 +8,7 @@ import com.jj.templateproject.notes.featurenote.domain.repository.NoteRepository
 import com.jj.templateproject.notes.featurenote.domain.usecases.AddNoteUseCase
 import com.jj.templateproject.notes.featurenote.domain.usecases.DeleteNoteUseCase
 import com.jj.templateproject.notes.featurenote.domain.usecases.GetNotesUseCase
+import com.jj.templateproject.notes.featurenote.domain.usecases.GetSingleNoteUseCase
 import com.jj.templateproject.notes.featurenote.domain.usecases.NoteUseCases
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +21,7 @@ val notesModule = module {
 
     single<NoteRepository> { NoteRepositoryImpl(get<NoteDatabase>().noteDao) }
 
-    single { NoteUseCases(GetNotesUseCase(get()), AddNoteUseCase(get()), DeleteNoteUseCase(get())) }
+    single { NoteUseCases(GetNotesUseCase(get()), AddNoteUseCase(get()), DeleteNoteUseCase(get()), GetSingleNoteUseCase(get())) }
 
     viewModel { NotesMainViewModel(get()) }
     viewModel { AddEditNoteViewModel(get()) }

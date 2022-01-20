@@ -12,6 +12,7 @@ import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEdi
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteViewEvent.ChangeTitleFocus
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteViewEvent.EnteredContentCharacter
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteViewEvent.EnteredTitleCharacter
+import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteViewEvent.LoadNote
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteViewEvent.SaveNote
 import com.jj.templateproject.notes.featureaddeditnote.presentation.viewmodels.AddEditNoteViewModel.ViewAction
 import com.jj.templateproject.notes.featureaddeditnote.presentation.viewmodels.AddEditNoteViewModel.ViewAction.NoteColorChanged
@@ -69,6 +70,18 @@ class AddEditNoteViewModel(private val useCases: NoteUseCases) : BaseViewModel<V
             is ChangeContentFocus -> sendViewAction(NoteContentFieldFocusChanged(event.hasFocus))
             is ChangeColor -> sendViewAction(NoteColorChanged(event.color))
             SaveNote -> saveNote()
+            is LoadNote -> loadNote(event.noteToEditId)
+        }
+    }
+
+    private fun loadNote(noteToEditId: Int) {
+        viewModelScope.launch {
+            useCases.getSingleNoteUseCase(noteToEditId)?.let { note ->
+                currentNoteId = note.id
+                sendViewAction(NoteTitleChanged(note.title))
+                sendViewAction(NoteContentChanged(note.content))
+                sendViewAction(NoteColorChanged(note.color))
+            }
         }
     }
 

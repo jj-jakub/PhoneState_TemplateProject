@@ -23,6 +23,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+const val NOTE_TO_EDIT_ID = "NOTE_TO_EDIT_ID"
+
 class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
 
     private val addEditNoteViewModel: AddEditNoteViewModel by viewModel()
@@ -38,11 +40,19 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val noteToEditId: Int? = arguments?.getInt(NOTE_TO_EDIT_ID)
+        if (noteToEditId != null) {
+            loadNote(noteToEditId)
+        }
         setupColorButtons()
         setupFieldsEventsListeners()
         fragmentAddEditNoteBinding.saveNoteButton.setOnClickListener {
             addEditNoteViewModel.onEvent(AddEditNoteViewEvent.SaveNote)
         }
+    }
+
+    private fun loadNote(noteToEditId: Int) {
+        addEditNoteViewModel.onEvent(AddEditNoteViewEvent.LoadNote(noteToEditId))
     }
 
     private fun setupColorButtons() {
@@ -83,8 +93,8 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
             addTextChangedListener(OnTextChangedWatcher {
                 addEditNoteViewModel.onEvent(AddEditNoteViewEvent.EnteredTitleCharacter(text.toString()))
             })
-            setOnFocusChangeListener { _, hasFocus ->
-                addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeTitleFocus(hasFocus))
+            setOnFocusChangeListener { _, hasNoFocus ->
+                addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeTitleFocus(hasNoFocus.not()))
             }
         }
 
@@ -92,8 +102,8 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
             addTextChangedListener(OnTextChangedWatcher {
                 addEditNoteViewModel.onEvent(AddEditNoteViewEvent.EnteredContentCharacter(text.toString()))
             })
-            setOnFocusChangeListener { _, hasFocus ->
-                addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeContentFocus(hasFocus))
+            setOnFocusChangeListener { _, hasNoFocus ->
+                addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeContentFocus(hasNoFocus.not()))
             }
         }
     }
@@ -122,14 +132,14 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
 
     private fun setupNoteTitle(noteTitleState: AddEditNoteTextFieldState) {
         with(fragmentAddEditNoteBinding.noteTitleInput) {
-//            text = noteContentState.content
+            if (!hasFocus()) setText(noteTitleState.content)
             hint = if (noteTitleState.isHintVisible) noteTitleState.hint else ""
         }
     }
 
     private fun setupNoteContent(noteContentState: AddEditNoteTextFieldState) {
         with(fragmentAddEditNoteBinding.noteContentInput) {
-//            text = noteContentState.content
+            if (!hasFocus()) setText(noteContentState.content)
             hint = if (noteContentState.isHintVisible) noteContentState.hint else ""
         }
     }

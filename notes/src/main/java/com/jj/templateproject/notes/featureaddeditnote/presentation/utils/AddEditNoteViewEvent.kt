@@ -6,5 +6,6 @@ sealed class AddEditNoteViewEvent {
     data class EnteredContentCharacter(val currentContent: String): AddEditNoteViewEvent()
     data class ChangeContentFocus(val hasFocus: Boolean): AddEditNoteViewEvent()
     data class ChangeColor(val color: Int): AddEditNoteViewEvent()
+    data class LoadNote(val noteToEditId: Int) : AddEditNoteViewEvent()
     object SaveNote: AddEditNoteViewEvent()
 }

@@ -31,11 +31,11 @@
     <fragment
         android:id="@+id/notesMainFragment"
         android:name="com.jj.templateproject.notes.featurenote.presentation.fragments.NotesMainFragment"
-        android:label="NotesMainFragment" >
-    </fragment>
+        android:label="NotesMainFragment" />
     <fragment
         android:id="@+id/addEditNoteFragment"
         android:name="com.jj.templateproject.notes.featureaddeditnote.presentation.fragments.AddEditNoteFragment"
-        android:label="AddEditNoteFragment" />
+        android:label="AddEditNoteFragment">
+    </fragment>
 
 </navigation>
