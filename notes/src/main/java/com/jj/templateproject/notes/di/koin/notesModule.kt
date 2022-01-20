@@ -1,6 +1,7 @@
 package com.jj.templateproject.notes.di.koin
 
 import androidx.room.Room
+import com.jj.templateproject.notes.featureaddeditnote.presentation.viewmodels.AddEditNoteViewModel
 import com.jj.templateproject.notes.featurenote.data.NoteRepositoryImpl
 import com.jj.templateproject.notes.featurenote.data.local.NoteDatabase
 import com.jj.templateproject.notes.featurenote.domain.repository.NoteRepository
@@ -22,4 +23,5 @@ val notesModule = module {
     single { NoteUseCases(GetNotesUseCase(get()), AddNoteUseCase(get()), DeleteNoteUseCase(get())) }
 
     viewModel { NotesMainViewModel(get()) }
+    viewModel { AddEditNoteViewModel(get()) }
 }

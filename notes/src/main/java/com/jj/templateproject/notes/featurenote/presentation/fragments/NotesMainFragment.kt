@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jj.templateproject.core.framework.presentation.fragments.BaseFragment
 import com.jj.templateproject.notes.R
@@ -11,11 +12,15 @@ import com.jj.templateproject.notes.databinding.FragmentNotesMainBinding
 import com.jj.templateproject.notes.featurenote.presentation.adapters.NoteAdapter
 import com.jj.templateproject.notes.featurenote.presentation.utils.NoteMainViewEvent
 import com.jj.templateproject.notes.featurenote.presentation.viewmodels.NotesMainViewModel
+import com.jj.templateproject.notes.navigation.NoteNavigation
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.java.KoinJavaComponent.inject
 
 class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
 
     private val notesMainViewModel: NotesMainViewModel by viewModel()
+
+    private val noteNavigation: NoteNavigation by inject(NoteNavigation::class.java)
 
     private lateinit var fragmentNotesMainBinding: FragmentNotesMainBinding
 
@@ -33,6 +38,9 @@ class NotesMainFragment : BaseFragment(R.layout.fragment_notes_main) {
         setupOrderSelectionSection()
         fragmentNotesMainBinding.undoDeleteButton.setOnClickListener {
             notesMainViewModel.onEvent(NoteMainViewEvent.RestoreNote)
+        }
+        fragmentNotesMainBinding.createNoteButton.setOnClickListener {
+            findNavController().navigate(noteNavigation.addEditNoteDestinationId())
         }
     }
 

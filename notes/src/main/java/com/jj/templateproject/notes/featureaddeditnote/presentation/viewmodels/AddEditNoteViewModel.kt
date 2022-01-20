@@ -32,7 +32,7 @@ class AddEditNoteViewModel(private val useCases: NoteUseCases) : BaseViewModel<V
 
     data class ViewState(
             val isLoading: Boolean = false,
-            val currentlySelectedColor: Int = Note.noteColors.random(),
+            val currentlySelectedColor: Int = Note.noteColorsResources.random(),
             val noteTitleState: AddEditNoteTextFieldState = AddEditNoteTextFieldState(hint = "Enter title"),
             val noteContentState: AddEditNoteTextFieldState = AddEditNoteTextFieldState(hint = "Enter content"),
     ) : BaseViewState
@@ -48,10 +48,10 @@ class AddEditNoteViewModel(private val useCases: NoteUseCases) : BaseViewModel<V
     override fun reduceState(viewAction: ViewAction): ViewState =
         when (viewAction) {
             is NoteTitleChanged -> state.copy(noteTitleState = state.noteTitleState.copy(content = viewAction.currentTitle))
-            is NoteContentChanged -> state.copy(noteTitleState = state.noteContentState.copy(content = viewAction.currentContent))
+            is NoteContentChanged -> state.copy(noteContentState = state.noteContentState.copy(content = viewAction.currentContent))
             is NoteTitleFieldFocusChanged -> state.copy(noteTitleState = state.noteTitleState.copy(
                     isHintVisible = viewAction.hasFocus && state.noteTitleState.content.isEmpty()))
-            is NoteContentFieldFocusChanged -> state.copy(noteTitleState = state.noteContentState.copy(
+            is NoteContentFieldFocusChanged -> state.copy(noteContentState = state.noteContentState.copy(
                     isHintVisible = viewAction.hasFocus && state.noteContentState.content.isEmpty()))
             is NoteColorChanged -> state.copy(currentlySelectedColor = viewAction.color)
         }
@@ -64,7 +64,7 @@ class AddEditNoteViewModel(private val useCases: NoteUseCases) : BaseViewModel<V
     fun onEvent(event: AddEditNoteViewEvent) {
         when (event) {
             is EnteredTitleCharacter -> sendViewAction(NoteTitleChanged(event.currentTitle))
-            is EnteredContentCharacter -> sendViewAction(NoteTitleChanged(event.currentContent))
+            is EnteredContentCharacter -> sendViewAction(NoteContentChanged(event.currentContent))
             is ChangeTitleFocus -> sendViewAction(NoteTitleFieldFocusChanged(event.hasFocus))
             is ChangeContentFocus -> sendViewAction(NoteContentFieldFocusChanged(event.hasFocus))
             is ChangeColor -> sendViewAction(NoteColorChanged(event.color))

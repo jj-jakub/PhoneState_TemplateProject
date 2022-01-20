@@ -7,42 +7,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/firstColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/secondColorButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/secondColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/thirdColorButton"
         app:layout_constraintStart_toEndOf="@+id/firstColorButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/thirdColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/fourthColorButton"
         app:layout_constraintStart_toEndOf="@+id/secondColorButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fourthColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/thirdColorButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fifthColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toStartOf="@+id/sixthColorButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstColorButton" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sixthColorButton"
         style="@style/ColorPickerButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteTitleInput" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.jj.templateproject.core.framework.presentation.fragments.BaseFragment
@@ -14,6 +16,7 @@ import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEdi
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteUIEffect.SaveNote
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteUIEffect.ShowToast
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEditNoteViewEvent
+import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.OnTextChangedWatcher
 import com.jj.templateproject.notes.featureaddeditnote.presentation.viewmodels.AddEditNoteViewModel
 import com.jj.templateproject.notes.featurenote.domain.model.Note
 import kotlinx.coroutines.flow.collect
@@ -35,56 +38,60 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupClickListeners()
+        setupColorButtons()
         setupFieldsEventsListeners()
-    }
-
-    private fun setupClickListeners() {
-        setupColorButtonsClickListeners()
         fragmentAddEditNoteBinding.saveNoteButton.setOnClickListener {
             addEditNoteViewModel.onEvent(AddEditNoteViewEvent.SaveNote)
         }
     }
 
-    private fun setupColorButtonsClickListeners() {
-        fragmentAddEditNoteBinding.firstColorButton.setOnClickListener {
-            addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColors.first()))
+    private fun setupColorButtons() {
+        with(fragmentAddEditNoteBinding.firstColorButton) {
+            val buttonColor = Note.noteColorsResources.first()
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
-        fragmentAddEditNoteBinding.secondColorButton.setOnClickListener {
-            addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColors[1]))
+        with(fragmentAddEditNoteBinding.secondColorButton) {
+            val buttonColor = Note.noteColorsResources[1]
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
-        fragmentAddEditNoteBinding.thirdColorButton.setOnClickListener {
-            addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColors[2]))
+        with(fragmentAddEditNoteBinding.thirdColorButton) {
+            val buttonColor = Note.noteColorsResources[2]
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
-        fragmentAddEditNoteBinding.fourthColorButton.setOnClickListener {
-            addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColors[3]))
+        with(fragmentAddEditNoteBinding.fourthColorButton) {
+            val buttonColor = Note.noteColorsResources[3]
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
-        fragmentAddEditNoteBinding.fifthColorButton.setOnClickListener {
-            addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColors[4]))
+        with(fragmentAddEditNoteBinding.fifthColorButton) {
+            val buttonColor = Note.noteColorsResources[4]
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
-        fragmentAddEditNoteBinding.sixthColorButton.setOnClickListener {
-            addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColors.last()))
+        with(fragmentAddEditNoteBinding.sixthColorButton) {
+            val buttonColor = Note.noteColorsResources.last()
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColorsResources.last())) }
         }
     }
 
     private fun setupFieldsEventsListeners() {
         with(fragmentAddEditNoteBinding.noteTitleInput) {
-            setOnKeyListener { _, _, _ ->
+            addTextChangedListener(OnTextChangedWatcher {
                 addEditNoteViewModel.onEvent(AddEditNoteViewEvent.EnteredTitleCharacter(text.toString()))
-                true
-            }
-
+            })
             setOnFocusChangeListener { _, hasFocus ->
                 addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeTitleFocus(hasFocus))
             }
         }
 
         with(fragmentAddEditNoteBinding.noteContentInput) {
-            setOnKeyListener { _, _, _ ->
+            addTextChangedListener(OnTextChangedWatcher {
                 addEditNoteViewModel.onEvent(AddEditNoteViewEvent.EnteredContentCharacter(text.toString()))
-                true
-            }
-
+            })
             setOnFocusChangeListener { _, hasFocus ->
                 addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeContentFocus(hasFocus))
             }
@@ -109,8 +116,8 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
         }
     }
 
-    private fun setupBackgroundColor(currentlySelectedColor: Int) {
-        fragmentAddEditNoteBinding.addEditNoteLayoutContainer.setBackgroundColor(currentlySelectedColor)
+    private fun setupBackgroundColor(@ColorRes currentlySelectedColor: Int) {
+        fragmentAddEditNoteBinding.addEditNoteLayoutContainer.setBackgroundResource(currentlySelectedColor)
     }
 
     private fun setupNoteTitle(noteTitleState: AddEditNoteTextFieldState) {
