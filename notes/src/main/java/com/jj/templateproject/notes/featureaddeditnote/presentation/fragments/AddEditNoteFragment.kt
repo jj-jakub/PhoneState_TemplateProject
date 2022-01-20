@@ -19,6 +19,7 @@ import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.AddEdi
 import com.jj.templateproject.notes.featureaddeditnote.presentation.utils.OnTextChangedWatcher
 import com.jj.templateproject.notes.featureaddeditnote.presentation.viewmodels.AddEditNoteViewModel
 import com.jj.templateproject.notes.featurenote.domain.model.Note
+import com.jj.templateproject.notes.presentation.utils.setBackgroundColorResource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,33 +59,33 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
     private fun setupColorButtons() {
         with(fragmentAddEditNoteBinding.firstColorButton) {
             val buttonColor = Note.noteColorsResources.first()
-            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setBackgroundColorResource(buttonColor)
             setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
         with(fragmentAddEditNoteBinding.secondColorButton) {
             val buttonColor = Note.noteColorsResources[1]
-            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setBackgroundColorResource(buttonColor)
             setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
         with(fragmentAddEditNoteBinding.thirdColorButton) {
             val buttonColor = Note.noteColorsResources[2]
-            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setBackgroundColorResource(buttonColor)
             setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
         with(fragmentAddEditNoteBinding.fourthColorButton) {
             val buttonColor = Note.noteColorsResources[3]
-            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setBackgroundColorResource(buttonColor)
             setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
         with(fragmentAddEditNoteBinding.fifthColorButton) {
             val buttonColor = Note.noteColorsResources[4]
-            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
+            setBackgroundColorResource(buttonColor)
             setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
         with(fragmentAddEditNoteBinding.sixthColorButton) {
             val buttonColor = Note.noteColorsResources.last()
-            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), buttonColor)
-            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(Note.noteColorsResources.last())) }
+            setBackgroundColorResource(buttonColor)
+            setOnClickListener { addEditNoteViewModel.onEvent(AddEditNoteViewEvent.ChangeColor(buttonColor)) }
         }
     }
 
