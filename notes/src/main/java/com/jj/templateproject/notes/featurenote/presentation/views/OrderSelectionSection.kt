@@ -62,4 +62,7 @@ class OrderSelectionSection @JvmOverloads constructor(
             }
         }
     }
+
+    fun getAscBtn() = binding.ascendingOrderRadioButton
+    fun getColorBtn() = binding.colorOrderRadioButton
 }
