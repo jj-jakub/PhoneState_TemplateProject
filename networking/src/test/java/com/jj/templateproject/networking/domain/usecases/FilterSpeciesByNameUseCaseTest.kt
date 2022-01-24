@@ -37,36 +37,36 @@ class FilterSpeciesByNameUseCaseTest {
     fun `should return list filtered by fishName`() {
         val result = filterSpeciesByNameUseCase.invoke("redfish", getFishItemsList())
 
-        assertEquals(1, result.getValue().size)
-        assertEquals(firstFishItem, result.getValue().first())
+        assertEquals(1, result.getValue()?.size)
+        assertEquals(firstFishItem, result.getValue()?.first())
     }
 
     @Test
     fun `should return full original list when fishName is empty`() {
         val result = filterSpeciesByNameUseCase.invoke("", getFishItemsList())
 
-        assertEquals(5, result.getValue().size)
-        assertEquals(firstFishItem, result.getValue().first())
-        assertEquals(secondFishItem, result.getValue()[1])
-        assertEquals(thirdFishItem, result.getValue()[2])
-        assertEquals(fourthFishItem, result.getValue()[3])
-        assertEquals(fifthFishItem, result.getValue().last())
+        assertEquals(5, result.getValue()?.size)
+        assertEquals(firstFishItem, result.getValue()?.first())
+        assertEquals(secondFishItem, result.getValue()?.get(1))
+        assertEquals(thirdFishItem, result.getValue()?.get(2))
+        assertEquals(fourthFishItem, result.getValue()?.get(3))
+        assertEquals(fifthFishItem, result.getValue()?.last())
     }
 
     @Test
     fun `should return list filtered by partial fishName`() {
         val result = filterSpeciesByNameUseCase.invoke("redf", getFishItemsList())
 
-        assertEquals(1, result.getValue().size)
-        assertEquals(firstFishItem, result.getValue().first())
+        result.getValue()?.let { assertEquals(1, it.size) }
+        assertEquals(firstFishItem, result.getValue()?.first())
     }
 
     @Test
     fun `should return list filtered by fishName ignoring case`() {
         val result = filterSpeciesByNameUseCase.invoke("rEDFIsh", getFishItemsList())
 
-        assertEquals(1, result.getValue().size)
-        assertEquals(firstFishItem, result.getValue().first())
+        assertEquals(1, result.getValue()?.size)
+        assertEquals(firstFishItem, result.getValue()?.first())
     }
 
     private fun getFishItemsList(): List<DefaultFishItemViewData> =
